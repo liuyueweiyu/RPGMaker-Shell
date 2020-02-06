@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 // import { init } from './helper/index';
-import { main,renderImage } from './helper/test';
+import { main,renderImage } from './webgi-utils/test';
 export interface Props {
     width : number;
     height : number;
@@ -17,8 +17,8 @@ function Render({width,height} : Props) {
         // image.src = "https://webglfundamentals.org/webgl/resources/leaves.jpg";  // 必须在同一域名下
         image.onload = function() {
             //   render(image);
-            // main(canvas);
-            renderImage(image,canvas)
+            main(canvas);
+            // renderImage(image,canvas)
             // console.log("images:",image);
         }
 

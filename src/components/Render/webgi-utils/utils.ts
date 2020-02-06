@@ -9,3 +9,13 @@ export function resizeCanvasToDisplaySize(canvas:HTMLCanvasElement, multiplier :
     }
     return false;
 }
+
+export function dataToArrayBuffer(type:string, data:Array<any>) {
+  switch (type) {
+    case 'Float32Array':
+      return new Float32Array(data);      
+    default:
+      break;
+  }
+  return new ArrayBuffer(0);
+}

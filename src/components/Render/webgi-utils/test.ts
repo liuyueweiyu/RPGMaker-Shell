@@ -1,5 +1,7 @@
 
 import { resizeCanvasToDisplaySize } from './utils';
+import { createProgram,createShader } from './base';
+import { commonTexture } from './shaders/texture';
 
 export function main(canvas:HTMLCanvasElement) {
     const gl = (canvas.getContext('webgl') || canvas.getContext('exprimental-wegl')) as WebGLRenderingContext;
@@ -61,8 +63,8 @@ export function main(canvas:HTMLCanvasElement) {
 
 export function renderImage(image: HTMLImageElement,canvas : HTMLCanvasElement) {
     const gl = (canvas.getContext('webgl') || canvas.getContext('exprimental-wegl')) as WebGLRenderingContext;
-    const vertexShader = createShader(gl,gl.VERTEX_SHADER,VERTEX_SHADER_RENDER_SOURCE);
-    const fragmentShader = createShader(gl,gl.FRAGMENT_SHADER,FRAGMENT_SHADER_RENDER_SOURCE);
+    const vertexShader = createShader(gl,gl.VERTEX_SHADER,commonTexture.vertexShader);
+    const fragmentShader = createShader(gl,gl.FRAGMENT_SHADER,commonTexture.fragmentShader);
     if(vertexShader && fragmentShader) {
         const program = createProgram(gl,vertexShader,fragmentShader);
         if (program) {
@@ -157,45 +159,8 @@ export function renderImage(image: HTMLImageElement,canvas : HTMLCanvasElement) 
     }
 }
 
-const VERTEX_SHADER_RENDER_SOURCE = `
-attribute vec2 a_position;
-attribute vec2 a_texCoord;
 
-uniform vec2 u_resolution;
 
-varying vec2 v_texCoord;
-
-void main() {
-   // convert the rectangle from pixels to 0.0 to 1.0
-   vec2 zeroToOne = a_position / u_resolution;
-
-   // convert from 0->1 to 0->2
-   vec2 zeroToTwo = zeroToOne * 2.0;
-
-   // convert from 0->2 to -1->+1 (clipspace)
-   vec2 clipSpace = zeroToTwo - 1.0;
-
-   gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-
-   // pass the texCoord to the fragment shader
-   // The GPU will interpolate this value between points.
-   v_texCoord = a_texCoord;
-}
-`;
-
-const FRAGMENT_SHADER_RENDER_SOURCE = `
-precision mediump float;
-
-// our texture
-uniform sampler2D u_image;
-
-// the texCoords passed in from the vertex shader.
-varying vec2 v_texCoord;
-
-void main() {
-   gl_FragColor = texture2D(u_image, v_texCoord);
-}
-`;
 
 const  VERTEX_SHADER_SOURCE = `
 attribute vec2 a_Position;
@@ -217,35 +182,6 @@ void main() {
   gl_FragColor = vec4(1, 0, 0.5, 1); // 返回“红紫色”
 }`
 
-
-function createProgram(gl:WebGLRenderingContext,vertexShader : WebGLShader,fragmentShader:WebGLShader) {
-    const program = gl.createProgram();
-    if(program) {
-        gl.attachShader(program,vertexShader);
-        gl.attachShader(program,fragmentShader);
-        gl.linkProgram(program);
-        if(gl.getProgramParameter(program,gl.LINK_STATUS)){
-            return program;
-        }
-        console.error(gl.getProgramInfoLog(program))
-    }
-    gl.deleteProgram(program);
-    return null;
-}
-
-function createShader(gl: WebGLRenderingContext, type : number, source : string) {
-    const shader = gl.createShader(type);
-    if ( shader) {
-        gl.shaderSource(shader,source);
-        gl.compileShader(shader);
-        if(gl.getShaderParameter(shader,gl.COMPILE_STATUS)) {
-            return shader;
-        }
-        console.error(gl.getShaderInfoLog(shader))
-    }
-    gl.deleteShader(shader);
-    return null;
-}
 
 function setRectangle(gl:WebGLRenderingContext, x:number, y:number, width:number, height:number) {
     var x1 = x;

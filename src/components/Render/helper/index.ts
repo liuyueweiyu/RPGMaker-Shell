@@ -3,7 +3,7 @@ export function init(canvas:HTMLCanvasElement) {
   const gl : WebGLRenderingContext | null = getWebGLContext(canvas);
   if (gl) {
     // 初始化着色器
-    const program = initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE);
+    const program = craetePromgram(gl, VSHADER_SOURCE, FSHADER_SOURCE);
     // 初始化缓冲
     if (program) {
       const n = initBuffers(gl,program);
@@ -11,9 +11,9 @@ export function init(canvas:HTMLCanvasElement) {
       gl.clearColor(0, 0, 0, 1);
       gl.clear(gl.COLOR_BUFFER_BIT);
       // 绘制
-      gl.drawArrays(gl.POINTS, 0, n);
+      // gl.drawArrays(gl.POINTS, 0, n);
+      gl.drawArrays(gl.TRIANGLES,0,n);
     }
-
   }
 
 }
@@ -49,30 +49,26 @@ const FSHADER_SOURCE =
     gl_FragColor = v_Color;
   }`;
 
-  function initShaders(gl : WebGLRenderingContext, vshader : string, fshader : string) {
-    // 分别加载顶点着色器和片段着色器
-    const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
-    const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
+function craetePromgram(gl : WebGLRenderingContext, vshader : string, fshader : string) {
+  // 分别加载顶点着色器和片段着色器
+  const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
+  const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
   
-    // 4.创建程序对象
-    const program : WebGLProgram | null= gl.createProgram();
-  
-    if (program && vertexShader && fragmentShader) {
-      // 5.编译过的着色器附加到程序对象中
-      gl.attachShader(program, vertexShader);
-      gl.attachShader(program, fragmentShader);
+  // 4.创建程序对象
+  const program : WebGLProgram | null= gl.createProgram();
+  if (program && vertexShader && fragmentShader) {
+    // 5.编译过的着色器附加到程序对象中
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+   
+    // 6.链接程序对象
+    gl.linkProgram(program);
     
-      // 6.链接程序对象
-      gl.linkProgram(program);
-    
-      // 7.调用程序对象
-      gl.useProgram(program);
-      // gl.program = program;
-    }
-
-  
-    return program;
-  }
+    // 7.调用程序对象
+    gl.useProgram(program);
+  }  
+  return program;
+}
   
 function loadShader(gl : WebGLRenderingContext, type : number, source : string) {
   // 1.创建着色器对象

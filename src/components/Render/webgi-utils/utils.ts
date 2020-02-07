@@ -19,3 +19,14 @@ export function dataToArrayBuffer(type:string, data:Array<any>) {
   }
   return new ArrayBuffer(0);
 }
+
+
+export function setUniformData(gl:WebGLRenderingContext,uniform:WebGLUniformLocation,type:string,data:any) {
+  switch (type) {
+    case 'uniform2f':
+      gl.uniform2f(uniform,data.x,data.y);
+      break;
+    default:
+      break;
+  }
+}

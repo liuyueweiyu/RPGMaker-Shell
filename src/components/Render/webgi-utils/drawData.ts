@@ -1,6 +1,7 @@
 export interface DrawData {
-    attributes : Array<AttributeData>;
-    uniforms : Array<UniformData>;
+    attributes : Array<AttributeData>|null;
+    uniforms : Array<UniformData>|null;
+    drawdata : DrawArrayData;
 }
 
 
@@ -26,3 +27,26 @@ export interface DrawArrayData {
     offset : number;
     count : number;
 }
+
+
+// export function NewDrawData(attributes:Array<AttributeData>,uniforms:Array<UniformData>,drawdata:DrawArrayData) {
+//     const data : DrawData = {
+//         attributes,
+//         uniforms,
+//         drawdata
+//     }
+//     return data;
+// }
+
+
+// export function NewAttributeDatas(data:any) {
+//     cons
+// }
+
+// export function NewUniformDatas() {
+    
+// }
+
+// export function NewDrawArrayDatas() {
+    
+// }

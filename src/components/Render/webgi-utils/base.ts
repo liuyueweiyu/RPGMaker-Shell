@@ -1,6 +1,6 @@
 import Shader from "./shaders/interface";
-import { AttributeData, UniformData } from './drawData';
-import { dataToArrayBuffer } from './utils';
+import { AttributeData, UniformData,DrawArrayData } from './drawData';
+import { dataToArrayBuffer, setUniformData } from './utils';
 export function getWebGLContext(canvas:HTMLCanvasElement) {
   return (canvas.getContext('webgl') || canvas.getContext('exprimental-wegl')) as WebGLRenderingContext
 }
@@ -61,9 +61,12 @@ export function setAttributes(gl:WebGLRenderingContext,program : WebGLProgram,at
 export function setUniforms(gl:WebGLRenderingContext,program : WebGLProgram,uniforms: Array<UniformData>) {
   uniforms.forEach(v=>{
     const uniform = gl.getUniformLocation(program,v.name);
-    // const x = 'uniform'+v.type;
-    // if(typeof gl.getS === 'function') {
-      
-    // }
-  })
+    if(uniform) {
+      setUniformData(gl,uniform,v.type,v.data);
+    }
+  });
+}
+
+export function drawArrays(gl:WebGLRenderingContext,data:DrawArrayData) {
+  gl.drawArrays(data.primitiveType,data.offset,data.count);
 }

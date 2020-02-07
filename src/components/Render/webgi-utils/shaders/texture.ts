@@ -1,6 +1,6 @@
 import Shader from "./interface";
 
-const VERTEX_SHADER_COMMON_SOURCE = `
+const VERTEX_SHADER_COMMON_TEXTURE_SOURCE = `
 attribute vec2 a_position;
 attribute vec2 a_texCoord;
 
@@ -25,7 +25,7 @@ void main() {
    v_texCoord = a_texCoord;
 }
 `;
-const FRAGMENT_SHADER_COMMON_SOURCE = `
+const FRAGMENT_SHADER_COMMON_TEXTURE_SOURCE = `
 precision mediump float;
 
 // our texture
@@ -39,6 +39,6 @@ void main() {
 }
 `;
 export const commonTexture : Shader = {
-    vertexShader : VERTEX_SHADER_COMMON_SOURCE,
-    fragmentShader : FRAGMENT_SHADER_COMMON_SOURCE
+    vertexShader : VERTEX_SHADER_COMMON_TEXTURE_SOURCE,
+    fragmentShader : FRAGMENT_SHADER_COMMON_TEXTURE_SOURCE
 }

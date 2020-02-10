@@ -51,10 +51,11 @@ export function setAttributes(gl:WebGLRenderingContext,program : WebGLProgram,at
   attributes.forEach((v)=>{
     const attribute = gl.getAttribLocation(program,v.name);
     const positionBuffer = gl.createBuffer();
-    // gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, dataToArrayBuffer(v.dataType,v.data),gl.STATIC_DRAW);
     gl.enableVertexAttribArray(attribute);
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.vertexAttribPointer(attribute,v.size,v.type,v.normalize,v.stride,v.offset);
   })
 }
 

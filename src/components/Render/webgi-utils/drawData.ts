@@ -7,7 +7,7 @@ export interface DrawData {
 
 export interface AttributeData {
     name : string;
-    data : Array<any>;
+    data : any;
     dataType : string;
     size : number;
     type : number;

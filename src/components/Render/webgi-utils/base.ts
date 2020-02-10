@@ -1,6 +1,6 @@
 import Shader from "./shaders/interface";
 import { AttributeData, UniformData,DrawArrayData } from './drawData';
-import { dataToArrayBuffer, setUniformData } from './utils';
+import { setBufferData, setUniformData } from './utils';
 export function getWebGLContext(canvas:HTMLCanvasElement) {
   return (canvas.getContext('webgl') || canvas.getContext('exprimental-wegl')) as WebGLRenderingContext
 }
@@ -47,16 +47,28 @@ export function createProgramWithShaderObj(gl:WebGLRenderingContext, shader : Sh
   return null;
 }
 
+export function createTexture(gl:WebGLRenderingContext,image :HTMLImageElement) {
+  const texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D,texture);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  // Upload the image into the texture.
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+  return texture;
+}
+
 export function setAttributes(gl:WebGLRenderingContext,program : WebGLProgram,attributes: Array<AttributeData>) {
   attributes.forEach((v)=>{
     const attribute = gl.getAttribLocation(program,v.name);
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, dataToArrayBuffer(v.dataType,v.data),gl.STATIC_DRAW);
+    setBufferData(gl,v);
     gl.enableVertexAttribArray(attribute);
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.vertexAttribPointer(attribute,v.size,v.type,v.normalize,v.stride,v.offset);
-  })
+    gl.vertexAttribPointer(attribute,v.size,v.type,v.normalize,v.stride,v.offset);   
+   })
 }
 
 export function setUniforms(gl:WebGLRenderingContext,program : WebGLProgram,uniforms: Array<UniformData>) {

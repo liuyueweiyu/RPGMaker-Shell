@@ -20,7 +20,7 @@ export function initShape(canvas: HTMLCanvasElement, shader: Shader,data : DrawD
     }
 }
 
-export function initTexture(canvas: HTMLCanvasElement, shader: Shader,images:Array<HTMLImageElement>,data : DrawData) {
+export function initTexture(canvas: HTMLCanvasElement, shader: Shader,image:HTMLImageElement,data : DrawData) {
     const gl = getWebGLContext(canvas);
     const program = createProgramWithShaderObj(gl ,shader);
     if(program) {
@@ -30,9 +30,7 @@ export function initTexture(canvas: HTMLCanvasElement, shader: Shader,images:Arr
         if(data.attributes) {
             setAttributes(gl,program,data.attributes);
         }
-        images.forEach(v=>{
-            createTexture(gl,v)
-        })
+        createTexture(gl,image)
         if(data.uniforms) {
             setUniforms(gl,program,data.uniforms);
         }

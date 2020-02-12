@@ -52,9 +52,7 @@ function Render({width,height} : Props) {
             //         count:6
             //     }
             // })
-            initTexture(canvas,commonTexture,[
-                image
-            ],{
+            initTexture(canvas,commonTexture,image,{
                 attributes : [{
                     name : 'a_position',
                     data :setRectangle(0,0,image.width,image.height),

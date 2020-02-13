@@ -1,11 +1,10 @@
 import React from 'react';
 import './App.css';
-import Render from './components/Render';
-import { Button } from 'antd';
+import Menu from './components/Operate/menu'
 const App = () => {
   return (
     <div className="App">
-      <Render width={600} height={600} />
+      <Menu />
     </div>
   );
 }

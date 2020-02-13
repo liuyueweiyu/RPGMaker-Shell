@@ -49,6 +49,10 @@ function GameMenu() {
                 <Icon type="drag" />
                 拖拽绘制
             </Menu.Item>
+            <Menu.Item key="highlight">
+                <Icon type="highlight" />
+                阴影绘制
+            </Menu.Item>
             <Menu.Item key="select">
                 <Icon type="select" />
                 选择

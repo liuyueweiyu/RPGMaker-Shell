@@ -1,9 +1,10 @@
 import React from 'react';
+import { WINDOW_DASHBORD_WIDTH } from '../../constant/window';
 import Slider from './slider';
 import Meterial from './material';
 function Dashbord() {
   return (
-    <div style={{width : 256,float:"left"}}>
+    <div style={{width : WINDOW_DASHBORD_WIDTH,float:"left",boxSizing:"border-box"}}>
       <Meterial />
       <Slider />
     </div>

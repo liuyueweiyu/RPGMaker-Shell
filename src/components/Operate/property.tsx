@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { WINDOW_PROPERTY_WIDTH,WINDOW_MENU_HEIGHT } from '../../constant/window';
 function Property() {
     return (
         // tslint:disable-next-line: jsx-self-close
-        <div style={{width:256,float:'right',height:'100vh',borderLeft:'1px solid #e8e8e8'}}>
+        <div style={{width:WINDOW_PROPERTY_WIDTH,float:'right',height:`calc(100vh - ${WINDOW_MENU_HEIGHT}px)`,borderLeft:'1px solid #e8e8e8',boxSizing:"border-box"}}>
         </div>
     )
 }

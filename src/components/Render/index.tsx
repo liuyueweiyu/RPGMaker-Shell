@@ -6,8 +6,8 @@ import { initTexture } from './webgi-utils/index';
 import { getWebGLContext } from './webgi-utils/base';
 import { setRectangle } from './webgi-utils/utils';
 export interface Props {
-    width : number;
-    height : number;
+    width : number|string;
+    height : number|string;
 }
 
 function Render({width,height} : Props) {
@@ -101,11 +101,9 @@ function Render({width,height} : Props) {
 
     })
     return (
-        <div>
-            <canvas id="webgl" width={width} height={height}>
-                浏览器不支持画布
-            </canvas>
-        </div>
+        <canvas id="webgl" style={{float:"left"}} width={width} height={height}>
+            浏览器不支持画布
+        </canvas>
     )
 }
 

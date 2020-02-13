@@ -1,0 +1,3 @@
+export const WINDOW_MENU_HEIGHT = 48;
+export const WINDOW_DASHBORD_WIDTH = 256;
+export const WINDOW_PROPERTY_WIDTH = 256;

@@ -3,7 +3,7 @@ import Slider from './slider';
 import Meterial from './material';
 function Dashbord() {
   return (
-    <div style={{width : 256}}>
+    <div style={{width : 256,float:"left"}}>
       <Meterial />
       <Slider />
     </div>

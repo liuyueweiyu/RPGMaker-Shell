@@ -1,5 +1,6 @@
 // import { getWebGLContext } from '../webgi-utils/base';
 import APIManager from './api/index';
+import { drawRectangle } from '../webgl';
 
 interface Engine {
     canvas : HTMLCanvasElement | null;
@@ -13,5 +14,5 @@ export const engine : Engine = {
 
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
-    // const gl = getWebGLContext(canvas);
+    drawRectangle(canvas,0,0,canvas.width,canvas.height,[0,0,0,0]);
 }

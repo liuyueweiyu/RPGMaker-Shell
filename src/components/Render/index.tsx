@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { initEngine } from './state/engine';
+import { initEngine,engine } from './state/engine';
 // import {  commonShape } from './webgi-utils/shaders/shape';
 // import { commonTexture } from './webgi-utils/shaders/texture';
 // import { initTexture } from './webgi-utils/index';
@@ -12,10 +12,12 @@ export interface Props {
 }
 
 function Render({width,height} : Props) {
+    console.log(12)
     useEffect(()=>{
         const canvas = document.getElementById('webgl') as HTMLCanvasElement;
         initEngine(canvas);
-
+        engine.api.callAPICallBack("test",{data:'hsh'})
+       
     })
     return (
         <canvas id="webgl" style={{float:"left"}} width={width} height={height}>

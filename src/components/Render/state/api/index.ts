@@ -1,23 +1,21 @@
 import { ResponseData,NewSuccess } from './response';
 import { MESSAGE_CODE_HAS_EXITED,MESSAGE_CODE_NOT_EXIT } from './../../../../constant/code';
+
+import testInit from './test';
+
 interface CBFunc {
     (data:any) : ResponseData;
 }
 
 class APIManager {
-    constructor(){ }
-    private static instance : APIManager;
-    private static APIMap:Map<string,CBFunc>;
-    private static cbMap:Map<string,CBFunc>;
-    static getInstance() {
-        if(!this.instance) {
-        this.instance = new APIManager();
-        }
-        return this.instance;
+    constructor(){
+        testInit(this);
     }
+    private APIMap:Map<string,CBFunc> = new Map();
+    private cbMap:Map<string,CBFunc> = new Map();
 
     // 前端注册回调用
-    public static registerTriggerCallBack(name:string,func:CBFunc){
+    registerTriggerCallBack(name:string,func:CBFunc){
         if(this.cbMap.has(name)) {
             const data:ResponseData = {
                 code : MESSAGE_CODE_HAS_EXITED,
@@ -29,7 +27,7 @@ class APIManager {
         this.cbMap.set(name,func);
         return NewSuccess(null);
     }
-    public static triggerCallBack(name:string,data:any) {
+    triggerCallBack(name:string,data:any) {
         const cb = this.cbMap.get(name);
         if(cb){
             console.log(`trigger callback [${name}],参数为:${JSON.stringify(data)}`);
@@ -46,7 +44,7 @@ class APIManager {
 
 
     // state中开放API用
-    public static registerAPICallBack(name:string,func:CBFunc) {
+    registerAPICallBack(name:string,func:CBFunc) {
         if(this.APIMap.has(name)) {
             const data:ResponseData = {
                 code : MESSAGE_CODE_HAS_EXITED,
@@ -59,7 +57,7 @@ class APIManager {
         return NewSuccess(null);
     }
     
-    public static callAPICallBack(name:string,data:any) {
+    callAPICallBack(name:string,data:any) {
         const cb = this.APIMap.get(name);
         if(cb) {
             console.log(`callAPI[${name}],参数为:${JSON.stringify(data)}`);

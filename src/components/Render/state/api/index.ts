@@ -42,6 +42,7 @@ class APIManager {
             msg : `callback[${name}] not exit`,
             data : null
         }
+        console.log(res)
     }
 
 

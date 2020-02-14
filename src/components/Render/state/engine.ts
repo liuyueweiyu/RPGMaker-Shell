@@ -14,5 +14,4 @@ export const engine : Engine = {
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
     // const gl = getWebGLContext(canvas);
-    
 }

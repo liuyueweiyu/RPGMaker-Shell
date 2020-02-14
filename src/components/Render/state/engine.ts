@@ -1,4 +1,4 @@
-import { getWebGLContext } from '../webgi-utils/base';
+// import { getWebGLContext } from '../webgi-utils/base';
 import APIManager from './api/index';
 
 interface Engine {
@@ -13,6 +13,6 @@ export const engine : Engine = {
 
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
-    const gl = getWebGLContext(canvas);
+    // const gl = getWebGLContext(canvas);
     
 }

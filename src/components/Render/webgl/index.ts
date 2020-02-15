@@ -37,7 +37,7 @@ export function drawRectangle(canvas:HTMLCanvasElement,x:number,y:number,width:n
     });
 }
 
-export function drawImage(canvas:HTMLCanvasElement,x:number,y:number,width:number,height:number,image:HTMLImageElement) {
+export function drawImage(canvas:HTMLCanvasElement,x:number,y:number,width:number,height:number,imageX:number,imageY:number,imageWidth:number,imageHeight:number,image:HTMLImageElement) {
     const gl = getWebGLContext(canvas);
     initTexture(canvas,commonTexture,image,{
         attributes : [{
@@ -51,7 +51,7 @@ export function drawImage(canvas:HTMLCanvasElement,x:number,y:number,width:numbe
             offset : 0
         },{
             name : 'a_texCoord',
-            data : setRectangle(0,0,0.5,0.5),
+            data : setRectangle(imageX,imageY,imageWidth,imageHeight),
             dataType : 'Float32Array',
             normalize : false,
             size : 2,

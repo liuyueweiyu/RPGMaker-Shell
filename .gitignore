@@ -28,4 +28,4 @@ yarn.lock
 
 /doc
 /public/img/*
-/src/images/*
+/src/components/Render/state/data/image/*

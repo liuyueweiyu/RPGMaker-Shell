@@ -10,6 +10,7 @@
     "@types/node": "^12.12.26",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
+    "@types/webpack-env": "^1.15.1",
     "antd": "^3.26.9",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -21,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "clear" : "rm -rf ./node_modules/"
+    "clear": "rm -rf ./node_modules/"
   },
   "eslintConfig": {
     "extends": "react-app"

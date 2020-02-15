@@ -19,12 +19,6 @@ export const engine : Engine = {
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
     drawRectangle(canvas,0,0,canvas.width,canvas.height,WINDOW_CANVAS_BACKGROUND_COLOR);
-    
-    // var image = new Image();
-    // image.src = "/logo192.png";
-    // image.onload = function() {
-    //     console.log("image load")
-    //     drawImage(canvas,0,0,image.width,image.height,image);
-    // }
+    // engine.widgets.initSrc(canvas);
     
 }

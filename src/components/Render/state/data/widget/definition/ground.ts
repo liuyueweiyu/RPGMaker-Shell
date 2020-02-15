@@ -1,8 +1,7 @@
 import { ImgFileStandard } from './index';
 
-
 const GroundFile: ImgFileStandard = {
-    src : 'tilesets/Dungeon_A1.png',
+    src : require( '../../image/tilesets/Dungeon_A1.png'),
     column : 16,
     row : 12,
     imgs : [{

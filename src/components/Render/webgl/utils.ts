@@ -36,6 +36,9 @@ export function setUniformData(gl:WebGLRenderingContext,uniform:WebGLUniformLoca
     case 'uniform2f':
       gl.uniform2f(uniform,data.x,data.y);
       break;
+    case 'uniform4f':
+      gl.uniform4f(uniform,data.x,data.y,data.z,data.w);
+      break;
     default:
       break;
   }
@@ -54,4 +57,13 @@ export function setRectangle(x:number, y:number, width:number, height:number) {
     x2, y1,
     x2, y2,
  ];
+}
+
+export function RGBA256toWebglColor(colors:Array<number>) {
+  return {
+    x : (colors[0] || 0) / 256,
+    y : (colors[1] || 1) / 256,
+    z : (colors[2] || 2) / 256,
+    w : (colors[3] === undefined ? 1 : colors[3])
+  }
 }

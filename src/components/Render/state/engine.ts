@@ -14,5 +14,5 @@ export const engine : Engine = {
 
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
-    drawRectangle(canvas,0,0,canvas.width,canvas.height,[0,0,0,0]);
+    drawRectangle(canvas,0,0,canvas.width,canvas.height,[250,250,250,1]);
 }

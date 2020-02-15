@@ -1,6 +1,7 @@
 // import { getWebGLContext } from '../webgi-utils/base';
 import APIManager from './api/index';
 import { drawRectangle } from '../webgl';
+import { WINDOW_CANVAS_BACKGROUND_COLOR } from '../../../constant/window';
 
 interface Engine {
     canvas : HTMLCanvasElement | null;
@@ -14,5 +15,5 @@ export const engine : Engine = {
 
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
-    drawRectangle(canvas,0,0,canvas.width,canvas.height,[250,250,250,1]);
+    drawRectangle(canvas,0,0,canvas.width,canvas.height,WINDOW_CANVAS_BACKGROUND_COLOR);
 }

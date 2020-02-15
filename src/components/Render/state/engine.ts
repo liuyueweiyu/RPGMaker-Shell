@@ -24,5 +24,4 @@ export function initEngine(canvas:HTMLCanvasElement) {
         drawImage(canvas,0,0,image.width,image.height,image);
     }
     
-        // image.src = "https://webglfundamentals.org/webgl/resources/leaves.jpg";  // 必须在同一域名下
 }

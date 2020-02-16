@@ -1,17 +1,16 @@
 import { MapFile } from './file';
 import { getNewID } from '../Generator/id';
 
-class Project  {
-    private name = "";
-    private id = 0;
-    private files : Map<number,MapFile>= new Map();
-    constructor(name:string) {        
-        this.name = name;
-        this.id = getNewID();
-    }
-    openFile() {
-
-    }
+export interface Project {
+    id : number;
+    name : string;
+    files : Map<number,MapFile>;
 }
 
-export default Project;
+export function NewProject(name:string):Project{
+    return {
+        id : getNewID(),
+        name : name,
+        files : new Map()
+    } 
+}

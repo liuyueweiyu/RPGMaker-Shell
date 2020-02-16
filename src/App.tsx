@@ -7,13 +7,6 @@ import Property from './components/Operate/property';
 import Render from './components/Render/index';
 import store from './redux';
 
-store.subscribe(()=>{
-  console.log("store.subscribe:",store.getState())
-})
-store.dispatch({
-  type : 'ADD_PROJECT',
-  name : 'new_pro'
-})
 const App = () => {
   const w = document.body.clientWidth - (WINDOW_DASHBORD_WIDTH+WINDOW_PROPERTY_WIDTH),
         h = document.body.clientHeight - WINDOW_MENU_HEIGHT;

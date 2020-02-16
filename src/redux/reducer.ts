@@ -1,17 +1,18 @@
-export const reducer = (state = [], action:any) => {
+import { combineReducers } from 'redux';
+import { ACTION_TYPE_ADD_PROJECT } from './anction';
+import { NewProject } from '../components/Project/project';
+
+export const projects = (state = [], action:any) => {
   switch (action.type) {
-    case 'ADD_PROJECT':
-      return [...state,newProject(action.name)] ;
+    case ACTION_TYPE_ADD_PROJECT:
+      return [...state,NewProject(action.name)] ;
     default: 
       return state;
   }
-  return state;
 };
 
 
-function newProject(name : string) {
-    return {
-      id : +new Date(),
-      name:name
-    }
-}
+export const reducer = combineReducers({
+  projects : projects
+})
+

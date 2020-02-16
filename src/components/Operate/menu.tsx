@@ -1,10 +1,19 @@
 import { Menu, Icon, Input } from 'antd';
 import React,{ useState } from 'react';
 import { Modal,InputNumber } from 'antd';
+import  store from '../../redux';
+import { addProject } from '../../redux/anction';
 
 function GameMenu() {
     const [current, setCurrent] = useState("");
+    
     const [addProjectFlag,setAddProjectFlag] = useState(true);
+    const [addProjectText,setAddProjectText] = useState("");
+    const addProjectEvent = ()=>{
+        setAddProjectFlag(false);
+        store.dispatch(addProject(addProjectText));
+    }
+
     const [visible, setVisible] = useState(false);
 
     return (
@@ -75,8 +84,15 @@ function GameMenu() {
                     测试游戏
                 </Menu.Item>
             </Menu>
-            <Modal title="新建项目" visible={addProjectFlag} onOk={()=>{setAddProjectFlag(false)}} onCancel={()=>{setAddProjectFlag(false)}}>
-                <Input placeholder="请输入项目名称" />
+            <Modal 
+                title="新建项目" 
+                okText="确认"
+                cancelText="取消"
+                visible={addProjectFlag} 
+                onOk={addProjectEvent} 
+                onCancel={()=>{setAddProjectFlag(false)}}
+            >
+                <Input onChange={(e)=>{setAddProjectText(e.target.value)}} placeholder="请输入项目名称" />
             </Modal>
             <Modal title="新建地图文件" visible={visible}  onOk={()=>{}} onCancel={()=>{}}>
                 创建地图规格： <InputNumber min={1} max={10}/> x  <InputNumber min={1} max={10}/>

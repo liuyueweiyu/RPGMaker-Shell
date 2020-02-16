@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu } from 'antd';
-import { WINDOW_MENU_HEIGHT } from '../../constant/window';
+import { WINDOW_MENU_HEIGHT } from '../Render/constant/window';
 
 function Material() {
     const [current, setCurrent] = useState("1");

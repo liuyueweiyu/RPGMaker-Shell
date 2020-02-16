@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import './App.css';
-import { WINDOW_DASHBORD_WIDTH,WINDOW_PROPERTY_WIDTH,WINDOW_MENU_HEIGHT } from './constant/window';
+import { WINDOW_DASHBORD_WIDTH,WINDOW_PROPERTY_WIDTH,WINDOW_MENU_HEIGHT } from './components/Render/constant/window';
 import Menu from './components/Operate/menu';
 import Dashbord from './components/Operate/dashboard';
 import Property from './components/Operate/property';

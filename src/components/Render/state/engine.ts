@@ -3,7 +3,7 @@ import APIManager from './api/index';
 import WidegtManager from './data/widget/manager';
 import { drawRectangle,drawImage } from '../webgl';
 import Widget from './data/widget';
-import { WINDOW_CANVAS_BACKGROUND_COLOR } from '../../../constant/window';
+import { WINDOW_CANVAS_BACKGROUND_COLOR } from '../constant/window';
 interface Engine {
     canvas : HTMLCanvasElement | null;
     api : APIManager ;

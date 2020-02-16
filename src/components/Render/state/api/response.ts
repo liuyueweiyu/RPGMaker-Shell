@@ -1,4 +1,4 @@
-import { MESSAGE_CODE_SUCCESS } from '../../../../constant/code';
+import { MESSAGE_CODE_SUCCESS } from '../../constant/code';
 export interface  ResponseData {
     code : number,
     msg :  string

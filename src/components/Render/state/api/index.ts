@@ -1,5 +1,5 @@
 import { ResponseData,NewSuccess } from './response';
-import { MESSAGE_CODE_HAS_EXITED,MESSAGE_CODE_NOT_EXIT } from './../../../../constant/code';
+import { MESSAGE_CODE_HAS_EXITED,MESSAGE_CODE_NOT_EXIT } from '../../constant/code';
 
 import testInit from './test';
 

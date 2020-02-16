@@ -1,5 +1,5 @@
 import React from 'react';
-import { WINDOW_DASHBORD_WIDTH } from '../../constant/window';
+import { WINDOW_DASHBORD_WIDTH } from '../Render/constant/window';
 import Slider from './slider';
 import Meterial from './material';
 function Dashbord() {

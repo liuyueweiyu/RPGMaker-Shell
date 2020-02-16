@@ -1,5 +1,5 @@
 import React from 'react';
-import { WINDOW_PROPERTY_WIDTH,WINDOW_MENU_HEIGHT } from '../../constant/window';
+import { WINDOW_PROPERTY_WIDTH,WINDOW_MENU_HEIGHT } from '../Render/constant/window';
 function Property() {
     return (
         // tslint:disable-next-line: jsx-self-close

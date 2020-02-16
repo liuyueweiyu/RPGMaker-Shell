@@ -1,16 +1,17 @@
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Input } from 'antd';
 import React,{ useState } from 'react';
 import { Modal,InputNumber } from 'antd';
 
 function GameMenu() {
     const [current, setCurrent] = useState("");
-    const [visible, setVisible] = useState(true);
+    const [addProjectFlag,setAddProjectFlag] = useState(true);
+    const [visible, setVisible] = useState(false);
 
     return (
         <React.Fragment>
             <Menu selectedKeys={[current]} onClick={e=>setCurrent(e.key)} mode="horizontal">
                 <Menu.Item key="folder-add">
-                <Icon type="folder-add" />
+                <Icon type="folder-add" onClick={()=>{setAddProjectFlag(true)}} />
                     新建项目
                 </Menu.Item>
                 <Menu.Item key="folder-open">
@@ -74,6 +75,9 @@ function GameMenu() {
                     测试游戏
                 </Menu.Item>
             </Menu>
+            <Modal title="新建项目" visible={addProjectFlag} onOk={()=>{setAddProjectFlag(false)}} onCancel={()=>{setAddProjectFlag(false)}}>
+                <Input placeholder="请输入项目名称" />
+            </Modal>
             <Modal title="新建地图文件" visible={visible}  onOk={()=>{}} onCancel={()=>{}}>
                 创建地图规格： <InputNumber min={1} max={10}/> x  <InputNumber min={1} max={10}/>
             </Modal>

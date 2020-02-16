@@ -1,4 +1,4 @@
-import { getNewID } from '../../id';
+import { getNewID } from '../../../../Generator/id';
 import Widegt from '../widget';
 class Node {
     private id : number;

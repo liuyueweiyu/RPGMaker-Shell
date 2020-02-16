@@ -1,4 +1,4 @@
-import { getNewID } from '../../id';
+import { getNewID } from '../../../../Generator/id';
 class Widget {
     private id : number;
     private parent : number = 0;    //父节点id

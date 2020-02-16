@@ -5,5 +5,5 @@ import { reducer } from './reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { LOCALSTORAFE_ITEM_MAP } from '../components/Render/constant/project';
 // @ts-ignore
-const store = createStore(reducer,JSON.parse(localStorage.getItem(LOCALSTORAFE_ITEM_MAP)),composeWithDevTools());
+const store = createStore(reducer,JSON.parse(localStorage.getItem(LOCALSTORAFE_ITEM_MAP)) || {},composeWithDevTools());
 export default store

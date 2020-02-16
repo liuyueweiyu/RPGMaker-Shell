@@ -3,35 +3,37 @@ import React,{ useState } from 'react';
 import { Modal,InputNumber } from 'antd';
 import  store from '../../redux';
 import { addProject } from '../../redux/anction';
+import { LOCALSTORAFE_ITEM_MAP } from '../Render/constant/project';
 
 function GameMenu() {
     const [current, setCurrent] = useState("");
     
-    const [addProjectFlag,setAddProjectFlag] = useState(true);
+    const [addProjectFlag,setAddProjectFlag] = useState(false);
     const [addProjectText,setAddProjectText] = useState("");
     const addProjectEvent = ()=>{
         setAddProjectFlag(false);
         store.dispatch(addProject(addProjectText));
+        setAddProjectText("");
     }
 
-    const [visible, setVisible] = useState(false);
+    const [addFileFlag, setAddFileFlag] = useState(false);
 
     return (
         <React.Fragment>
             <Menu selectedKeys={[current]} onClick={e=>setCurrent(e.key)} mode="horizontal">
-                <Menu.Item key="folder-add">
-                <Icon type="folder-add" onClick={()=>{setAddProjectFlag(true)}} />
+                <Menu.Item key="folder-add" onClick={()=>{setAddProjectFlag(true)}}>
+                <Icon type="folder-add"  />
                     新建项目
                 </Menu.Item>
                 <Menu.Item key="folder-open">
                     <Icon type="folder-open" />
                     打开项目
                 </Menu.Item>
-                <Menu.Item key="file" onClick={()=>{setVisible(true)}}>
+                <Menu.Item key="file" onClick={()=>{setAddProjectFlag(true)}}>
                     <Icon type="file" />
                     新建地图文件
                 </Menu.Item>
-                <Menu.Item key="save">
+                <Menu.Item key="save" onClick={()=>{localStorage.setItem(LOCALSTORAFE_ITEM_MAP,JSON.stringify(store.getState()))}}>
                     <Icon type="save" />
                     保存文件
                 </Menu.Item>
@@ -94,7 +96,7 @@ function GameMenu() {
             >
                 <Input onChange={(e)=>{setAddProjectText(e.target.value)}} placeholder="请输入项目名称" />
             </Modal>
-            <Modal title="新建地图文件" visible={visible}  onOk={()=>{}} onCancel={()=>{}}>
+            <Modal title="新建地图文件" visible={addFileFlag}  onOk={()=>{setAddFileFlag(false)}} onCancel={()=>{setAddFileFlag(false)}}>
                 创建地图规格： <InputNumber min={1} max={10}/> x  <InputNumber min={1} max={10}/>
             </Modal>
         </React.Fragment>

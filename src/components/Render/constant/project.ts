@@ -1,0 +1,1 @@
+export const LOCALSTORAFE_ITEM_MAP = 'gameMap';

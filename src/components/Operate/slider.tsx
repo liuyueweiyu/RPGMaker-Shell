@@ -1,59 +1,58 @@
-import { Menu, Icon } from 'antd';
-import React from 'react';
+import { Menu } from 'antd';
+import React,{ useState } from 'react';
+import store from '../../redux/index';
+import { Project } from '../Project/project';
 const { SubMenu } = Menu;
 
-class Slider extends React.Component {
-  // submenu keys of first level
-  rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
-  state = {
-    openKeys: ['sub1'],
-  };
-
-  onOpenChange = (openKeys:Array<string>) => {
-    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-    if (latestOpenKey && this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      this.setState({ openKeys });
-    } else {
-      this.setState({
-        openKeys: latestOpenKey ? [latestOpenKey] : [],
-      });
+function Sider() {
+  const [current, setCurrent] = useState('')
+  const [list, setList] = useState(store.getState().projects as Array<Project>)
+  store.subscribe(()=>{
+    if(store.getState().projects !== list) {
+      setList(store.getState().projects)
     }
+  })
+  const handleClick = (e:any )=> {
+    console.log('click ', e);
+    setCurrent(e.key);
   };
-
-  render() {
-    return (
+  return (
+    <div>
       <Menu
+        onClick={handleClick}
+        style={{ width: '100%' }}
+        selectedKeys={[current]}
         mode="inline"
-        openKeys={this.state.openKeys}
-        onOpenChange={this.onOpenChange}
-        style={{ width: '100%',height:'50vh' }}
       >
-        <SubMenu
-          key="sub1"
-          // tslint:disable-next-line: jsx-no-multiline-js
-          title={
-            (
-              <span>
-                <Icon type="folder" />
-                <span>项目1</span>x
-              </span>
+        {
+          list.map((v)=>{
+            return (
+              <SubMenu
+                key={v.id.toString()}
+                // tslint:disable-next-line: jsx-no-multiline-js
+                title={(
+                  <span>
+                    <span>{v.name}</span>
+                  </span>
+                )}
+              >
+                {
+                  // tslint:disable-next-line: jsx-no-multiline-js
+                  v.files.map((file)=>{
+                    return (
+                      <Menu.Item key={file.id.toString()}>{file.name}</Menu.Item>
+                    )
+                  })
+                }
+                
+              </SubMenu>
             )
+          })
         }
-        >
-          <Menu.Item key="1">
-            <Icon type="file" />
-            Option 1
-          </Menu.Item>
-          <Menu.Item key="2"><Icon type="file" />Option 2</Menu.Item>
-          <Menu.Item key="3"><Icon type="file" />Option 3</Menu.Item>
-          <Menu.Item key="4"><Icon type="file" />Option 4</Menu.Item>
-        </SubMenu>
       </Menu>
-    );
-  }
+    </div>
+  );
 }
 
-
-
-export default Slider
+export default Sider;

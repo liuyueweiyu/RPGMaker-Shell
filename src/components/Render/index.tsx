@@ -16,9 +16,9 @@ function Render({width,height} : Props) {
     useEffect(()=>{
         const canvas = document.getElementById('webgl') as HTMLCanvasElement;
         initEngine(canvas);
-        engine.api.callAPICallBack("test",{data:'hsh'},(data)=>{
-            console.log(data)
-        })
+        // engine.api.callAPICallBack("test",{data:'hsh'},(data)=>{
+        //     console.log(data)
+        // })
        
     })
     return (

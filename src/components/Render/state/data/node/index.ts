@@ -34,7 +34,11 @@ class Node {
     }
 
     render() {
+        console.log('render:'+this.id)
+    }
 
+    getId() {
+        return this.id;
     }
 }
 

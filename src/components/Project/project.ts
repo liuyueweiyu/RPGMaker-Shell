@@ -14,3 +14,5 @@ export function NewProject(name:string):Project{
         files : []
     } 
 }
+
+export const PROJECT_IS_NULL = 0;

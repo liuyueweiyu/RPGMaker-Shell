@@ -1,5 +1,6 @@
 import { createTexture } from './base';
 import { AttributeData } from './drawData';
+import { Color } from '../state/data/style/color';
 export function resizeCanvasToDisplaySize(canvas:HTMLCanvasElement, multiplier :number) {
     multiplier = multiplier || 1;
     const width  = canvas.clientWidth  * multiplier | 0;
@@ -66,4 +67,13 @@ export function RGBA256toWebglColor(colors:Array<number>) {
     z : (colors[2] || 2) / 256,
     w : (colors[3] === undefined ? 1 : colors[3])
   }
+}
+
+export function ColorToArray(color :Color) {
+  return [
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  ]
 }

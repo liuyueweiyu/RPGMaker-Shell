@@ -4,34 +4,30 @@ import {
     RENDER_TICK_TYPE_UPDATE_SHAPE 
 } from '../../../constant/bridge';
 import { drawRectangles } from '../../../webgl/index';
+import { Style } from '../style';
+import { ViewData } from '../../../webgl/drawData';
 import { engine } from '../../engine';
-export interface RenderConfig {
-    x : number;
-    y : number;
-    w : number;
-    h : number;
-}
-
 export interface RenderTick {
     type : string;
-    config : RenderConfig;
+    viewData : ViewData;
 }
 
 class RenderBridge {
-    private shadelist : Array<RenderConfig> = [];
-    private texturelist : Array<RenderConfig> = [];
+    private shadelist : Array<ViewData> = [];
+    private texturelist : Array<ViewData> = [];
     start() {
         this.shadelist = [];
         this.texturelist = [];
     }
     addTick(tick : RenderTick) {
         if(tick.type === RENDER_TICK_TYPE_ADD_SHAPE || tick.type === RENDER_TICK_TYPE_DELETE_SHAPE || tick.type === RENDER_TICK_TYPE_UPDATE_SHAPE) {
-            this.shadelist.push(tick.config)
+            this.shadelist.push(tick.viewData)
         } 
     }
     end() {
         console.log("bridget endddddddddddddddd")
-        drawRectangles(engine.canvas as HTMLCanvasElement,this.shadelist,[255,0,0,1]);
+        drawRectangles(engine.canvas as HTMLCanvasElement,this.shadelist);
+        // test(engine.canvas as HTMLCanvasElement,this.shadelist,[255,0,0,1]);
     }
 }
 

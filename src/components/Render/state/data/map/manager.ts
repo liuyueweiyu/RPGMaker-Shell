@@ -26,7 +26,7 @@ class MapManager {
         this.nodes.forEach(v=>{
             bridge.addTick({
                 type : RENDER_TICK_TYPE_ADD_SHAPE,
-                config : v.getRenderTick().config
+                viewData : v.getRenderTick()
             });
         })
         bridge.end();

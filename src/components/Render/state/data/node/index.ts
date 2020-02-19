@@ -1,6 +1,8 @@
 import { getNewID } from '../../../../Generator/id';
 import Widegt from '../widget';
 import { NODE_WIDTH,NODE_HEIGHT } from '../../../constant/node';
+import { engine } from '../../engine';
+import { Style } from '../style';
 
 class Node {
     private id : number;
@@ -40,13 +42,11 @@ class Node {
 
     getRenderTick() {
         return {
-            type : "normal",
-            config : {
-                x : this.x,
-                y : this.y,
-                w : NODE_WIDTH,
-                h : NODE_HEIGHT
-            }
+            x : this.x,
+            y : this.y,
+            w : NODE_WIDTH,
+            h : NODE_HEIGHT,
+            style : engine.style.getStyle("normal") as Style,
         }
     }
 }

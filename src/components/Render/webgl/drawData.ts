@@ -1,3 +1,5 @@
+import { Style } from "../state/data/style";
+
 export interface DrawData {
     attributes : Array<AttributeData>|null;
     uniforms : Array<UniformData>|null;
@@ -26,4 +28,12 @@ export interface DrawArrayData {
     primitiveType : number;
     offset : number;
     count : number;
+}
+
+export interface ViewData {
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    style : Style
 }

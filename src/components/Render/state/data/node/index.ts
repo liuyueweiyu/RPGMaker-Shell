@@ -19,7 +19,7 @@ class Node {
         this.canReach = this.canReach || w.getCanReach();
         let pos = -1;
         this.widgets.some((v,i)=>{
-            const flag = v.getWidgetType() == w.getWidgetType();
+            const flag = v.getWidgetType() === w.getWidgetType();
             if(flag) {
                 pos = i;
             }

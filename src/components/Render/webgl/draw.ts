@@ -1,8 +1,7 @@
 import Shader from './shaders/interface';
 import { DrawData, AttributeData, UniformData, ViewData } from './drawData';
 import { setAttributes, createProgramWithShaderObj, createTexture ,getWebGLContext,setUniforms,drawArrays } from './base';
-import { setRectangle, ColorToArray } from './utils';
-
+import { setRectangle, ColorToArray,RGBA256toWebglColor } from './utils';
 export function initShape(canvas: HTMLCanvasElement, shader: Shader,data : DrawData) {
     const gl = getWebGLContext(canvas);
     const program = createProgramWithShaderObj(gl ,shader);
@@ -49,11 +48,11 @@ export function initBatchOfShape(canvas: HTMLCanvasElement,shader: Shader, data:
                 offset : 0
             }
             setAttributes(gl,program,[attribute]);
-            console.log('color',ColorToArray(v.style.backgound))
+            // console.log('color',ColorToArray(v.style.backgound))
             const uniform :UniformData = {
                 name : 'u_color',
                 type : 'uniform4f',
-                data : ColorToArray(v.style.backgound)
+                data : RGBA256toWebglColor(ColorToArray(v.style.backgound))
             }
             setUniforms(gl,program,[uniform]);
             // 绘制

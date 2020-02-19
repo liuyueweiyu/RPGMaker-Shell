@@ -1,5 +1,7 @@
 import { getNewID } from '../../../../Generator/id';
 import Widegt from '../widget';
+import { NODE_WIDTH,NODE_HEIGHT } from '../../../constant/node';
+import { engine } from '../../engine';
 class Node {
     private id : number;
     private x : number;
@@ -35,6 +37,7 @@ class Node {
 
     render() {
         console.log('render:'+this.id)
+        engine.style.renderStyle('narmal',this.x,this.y,NODE_WIDTH,NODE_HEIGHT)
     }
 
     getId() {

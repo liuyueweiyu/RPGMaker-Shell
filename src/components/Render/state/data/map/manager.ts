@@ -6,12 +6,11 @@ import { NODE_TYPE_GRASS } from '../../../constant/node';
 class MapManager {
     nodes : Map<number,Node> = new Map()
     constructor() {}
-    createMap(column : number,row: number) {
-
+    createMap(row : number,column: number) {
         if(engine.canvas?.width && engine.canvas?.height) {
-            console.log("hhhhhhhh")
-            const startX = (engine.canvas?.width - column * NODE_WIDTH) / 2;
-            const startY = (engine.canvas?.height - row * NODE_WIDTH) / 2;
+            // const startX = (engine.canvas?.width - column * NODE_WIDTH) / 2;
+            // const startY = (engine.canvas?.height - row * NODE_HEIGHT) / 2;
+            const startY = 0,startX = 0;
             for (let i = 0; i < row; i++) {
                 for (let j = 0; j < column; j++) {
                     const node = new Node(startX + i * NODE_WIDTH, startY + j * NODE_HEIGHT , NODE_TYPE_GRASS);
@@ -21,9 +20,8 @@ class MapManager {
         }
     }
     renderMap() {
-
         this.nodes.forEach(v=>{
-            console.log(v)
+            v.render()
         })
     }
 }

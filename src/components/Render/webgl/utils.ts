@@ -60,6 +60,15 @@ export function setRectangle(x:number, y:number, width:number, height:number) {
  ];
 }
 
+export function getBorderPoint(x:number,y:number,w:number,h:number,r:number) {
+    const arr = [];
+    arr.push(...setRectangle(x,y,r,h));
+    arr.push(...setRectangle(x+r,y,w-r*2,r));
+    arr.push(...setRectangle(x+w-r,y,r,h));
+    arr.push(...setRectangle(x+r,y+h-r,w-r*2,r));
+    return arr;
+}
+
 export function RGBA256toWebglColor(colors:Array<number>) {
   return {
     x : (colors[0] || 0) / 256,

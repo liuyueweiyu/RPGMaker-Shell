@@ -1,7 +1,5 @@
 import { drawRectangle } from '../../../webgl';
 import { engine } from '../../engine';
-import { render } from '@testing-library/react';
-import { stringify } from 'querystring';
 interface Func {
     (x:number,y:number,w:number,h:number):any
 }

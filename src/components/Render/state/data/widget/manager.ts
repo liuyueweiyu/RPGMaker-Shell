@@ -3,8 +3,6 @@ import images from './definition';
 import { drawImage } from '../../../webgl';
 
 class Manager {
-    constructor() {
-    }
     async initSrc(canvas:HTMLCanvasElement) {
         try {
             images.forEach(async v=>{

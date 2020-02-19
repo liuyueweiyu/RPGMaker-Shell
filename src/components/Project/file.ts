@@ -1,4 +1,3 @@
-import store from '../../redux';
 import { getNewID } from '../Generator/id';
 import { Project } from './project';
 export interface MapFile {

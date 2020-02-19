@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { initEngine,engine } from './state/engine';
+import { initEngine } from './state/engine';
 // import {  commonShape } from './webgi-utils/shaders/shape';
 // import { commonTexture } from './webgi-utils/shaders/texture';
 // import { initTexture } from './webgi-utils/index';

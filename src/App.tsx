@@ -5,7 +5,6 @@ import Menu from './components/Operate/menu';
 import Dashbord from './components/Operate/dashboard';
 import Property from './components/Operate/property';
 import Render from './components/Render/index';
-import store from './redux';
 
 const App = () => {
   const w = document.body.clientWidth - (WINDOW_DASHBORD_WIDTH+WINDOW_PROPERTY_WIDTH),

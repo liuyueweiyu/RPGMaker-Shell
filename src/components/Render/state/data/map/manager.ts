@@ -2,10 +2,11 @@ import Node from '../node';
 import { engine } from '../../engine';
 import { NODE_WIDTH, NODE_HEIGHT } from '../../../constant/node';
 import { NODE_TYPE_GRASS } from '../../../constant/node';
+import RenderBridge from '../bridge';
+import { RENDER_TICK_TYPE_ADD_SHAPE } from '../../../constant/bridge';
 
 class MapManager {
     nodes : Map<number,Node> = new Map()
-    constructor() {}
     createMap(row : number,column: number) {
         if(engine.canvas?.width && engine.canvas?.height) {
             // const startX = (engine.canvas?.width - column * NODE_WIDTH) / 2;
@@ -20,9 +21,15 @@ class MapManager {
         }
     }
     renderMap() {
+        const bridge = new RenderBridge();
+        bridge.start();
         this.nodes.forEach(v=>{
-            v.render()
+            bridge.addTick({
+                type : RENDER_TICK_TYPE_ADD_SHAPE,
+                config : v.getRenderTick().config
+            });
         })
+        bridge.end();
     }
 }
 

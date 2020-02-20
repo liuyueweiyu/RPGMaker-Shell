@@ -38,8 +38,30 @@ class Node {
             this.widgets[pos] = w;
         }
     }
+    
+    setId(id:number) {
+        this.id = id;
+    }
     getId() {
         return this.id;
+    }
+    setX(x:number) {
+        this.x = x;
+    }
+    setY(y:number) {
+        this.y = y;
+    }
+    setNodeType(nodeType:number) {
+        this.nodeType = nodeType;
+    }
+    setWidgets(widgets:Array<Widegt>) {
+        this.widgets = widgets;
+    }
+    setCanReach(canReach:boolean) {
+        this.canReach = canReach;
+    }
+    setStyleType(styleType:string) {
+        this.styleType = styleType;
     }
 
     getRenderTick() {

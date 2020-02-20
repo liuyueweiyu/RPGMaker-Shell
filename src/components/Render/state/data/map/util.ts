@@ -1,5 +1,6 @@
 import { Project } from "../../../../Project/project";
 import Node from '../node/index';
+import { getNodeWithJson } from "../node/util";
 export function StateToJson(state : any) {
     const s = Object.assign({},state);
     s.openedMapFile = 0;
@@ -28,7 +29,7 @@ export function JsonToState(str: string) {
                 const m  : Map<number,Node>= new Map();
                 for (const key in f.nodes) {
                     if (f.nodes.hasOwnProperty(key)) {
-                        m.set(Number(key),f.nodes[key])
+                        m.set(Number(key),getNodeWithJson(f.nodes[key]))
                     }
                 }
                 f.nodes = m;

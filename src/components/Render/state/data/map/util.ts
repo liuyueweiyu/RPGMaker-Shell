@@ -21,7 +21,7 @@ export function StateToJson(state : any) {
 }
 
 export function JsonToState(str: string) {
-    const state = JSON.parse(str);
+    const state = JSON.parse(str) || {};
     const projects : Array<Project> = [];
     if (state.projects) {
         state.projects.forEach((p:any)=>{

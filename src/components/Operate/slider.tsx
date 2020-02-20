@@ -11,7 +11,8 @@ function Sider() {
   const [current, setCurrent] = useState('')
   const [list, setList] = useState(store.getState().projects as Array<Project>)
   const [openProject, setOpenedProject] = useState(store.getState().openedProject);
-  const [openFile, setOpenedFile] = useState(store.getState().openedMapFile);
+  // @ts-ignore
+  const [openFile, setOpenedFile] = useState(store.getState().openedMapFile.id);
 
   store.subscribe(()=>{
     if(store.getState().projects !== list) {

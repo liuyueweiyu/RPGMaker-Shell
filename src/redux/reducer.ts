@@ -3,7 +3,6 @@ import {
   ACTION_TYPE_ADD_PROJECT,
   ACTION_TYPE_ADD_FILE,
   ACTION_TYPE_SET_OPENED_PROJECT,
-  ACTION_TYPE_SET_OPENED_FILE,
   ACTION_TYPE_OPEN_FILE
 } from './anction';
 import { NewProject } from '../components/Project/project';
@@ -28,10 +27,8 @@ export const openedProject = (state = 0, action: any) => {
   }
 }
 
-export const openedMapFile = (state = 0, action: any) => {
+export const openedMapFile = (state = {}, action: any) => {
   switch (action.type) {
-    case ACTION_TYPE_SET_OPENED_FILE:
-      return action.id;
     case ACTION_TYPE_OPEN_FILE:
       return OpenMapFile(action.mapFile);
     default:

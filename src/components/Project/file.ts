@@ -43,7 +43,7 @@ export function OpenMapFile(mf:MapFile) {
     engine.api.callAPICallBack("OpenFile",{mapFile : mf},(res)=>{
         console.log(res)
     })
-    return mf.id;
+    return mf;
 }
 
 

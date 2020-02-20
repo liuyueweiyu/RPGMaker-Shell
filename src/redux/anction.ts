@@ -16,14 +16,6 @@ export function setOpenedProjectAction(id: number) {
     }
 }
 
-export const ACTION_TYPE_SET_OPENED_FILE = "SET_OPENED_FILE";
-export function setOpenedFileAction(id:number) {
-    return {
-        type : ACTION_TYPE_SET_OPENED_FILE,
-        id : id
-    }
-}
-
 export const ACTION_TYPE_ADD_FILE = "ADD_FILE";
 export function addFileAction(name:string, row:number ,column:number , projectId: number) {
     return {

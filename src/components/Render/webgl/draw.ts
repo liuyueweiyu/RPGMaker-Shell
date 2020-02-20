@@ -64,7 +64,6 @@ export function initBatchOfShape(canvas: HTMLCanvasElement,shader: Shader, data:
             // 绘制border
             if(r !== 0) {
                 attribute.data = getBorderPoint(v.x,v.y,v.w,v.h,r);
-                attribute.data = attribute.data.slice(0,30)              
                 setAttributes(gl,program,[attribute]);
                 uniform.data = RGBA256toWebglColor(ColorToArray(v.style.borderColor));
                 setUniforms(gl,program,[uniform]);

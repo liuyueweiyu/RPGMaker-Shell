@@ -1,3 +1,5 @@
+import { MapFile } from "../components/Project/file";
+
 export const ACTION_TYPE_ADD_PROJECT = "ADD_PROJECT";
 export function addProjectAction(name : string) {
     return {
@@ -30,5 +32,13 @@ export function addFileAction(name:string, row:number ,column:number , projectId
         row : row,
         column : column,
         projectId : projectId
+    }
+}
+
+export const ACTION_TYPE_OPEN_FILE = "OPEN_FILE";
+export function openFileAction(mf:MapFile){
+    return {
+        type :ACTION_TYPE_OPEN_FILE,
+        mapFile : mf
     }
 }

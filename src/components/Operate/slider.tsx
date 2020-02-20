@@ -1,8 +1,9 @@
 import { Menu } from 'antd';
 import React,{ useState } from 'react';
 import store from '../../redux/index';
-import { setOpenedProjectAction, setOpenedFileAction } from '../../redux/anction';
+import { setOpenedProjectAction, openFileAction } from '../../redux/anction';
 import { Project } from '../Project/project';
+import { MapFile } from '../Project/file';
 const { SubMenu } = Menu;
 
 
@@ -26,18 +27,17 @@ function Sider() {
   };
   const openProjectEvent = (id:number)=>{
     // 打开一个i项目前确认其他项目的文件都关闭
-    if(id !== 0) {
-      openMapFileEvent(0);
-    }
+    // if(id !== 0) {
+    // }
     const flag = openProject === id ? 0:id;
     setOpenedProject(flag);
     store.dispatch(setOpenedProjectAction(flag));
     
   }
-  const openMapFileEvent = (id:number) =>{
-    if(id !== openFile) {
-      setOpenedFile(id);
-      store.dispatch(setOpenedFileAction(id));
+  const openMapFileEvent = (mf:MapFile) =>{
+    if(mf.id !== openFile) {
+      setOpenedFile(mf.id);
+      store.dispatch(openFileAction(mf))
     }
   }
   return (
@@ -67,7 +67,7 @@ function Sider() {
                   // tslint:disable-next-line: jsx-no-multiline-js
                   v.files.map((file)=>{
                     return (
-                      <Menu.Item key={file.id.toString()} onClick={openMapFileEvent.bind(undefined,file.id)}>{file.name}</Menu.Item>
+                      <Menu.Item key={file.id.toString()} onClick={openMapFileEvent.bind(undefined,file)}>{file.name}</Menu.Item>
                     )
                   })
                 }

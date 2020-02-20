@@ -5,6 +5,7 @@ import  store from '../../redux';
 import { addProjectAction, addFileAction } from '../../redux/anction';
 import { LOCALSTORAFE_ITEM_MAP } from '../Render/constant/project';
 import { engine } from '../Render/state/engine';
+import { StateToJson } from '../Render/state/data/map/util';
 
 function GameMenu() {
     const [current, setCurrent] = useState("");
@@ -19,9 +20,7 @@ function GameMenu() {
 
     const save = ()=>{
         const state = store.getState();
-        state.openedMapFile = 0;
-        state.openedProject = 0;
-        localStorage.setItem(LOCALSTORAFE_ITEM_MAP,JSON.stringify(state))
+        localStorage.setItem(LOCALSTORAFE_ITEM_MAP,StateToJson(state))
     }
 
     const [addFileFlag, setAddFileFlag] = useState(false);

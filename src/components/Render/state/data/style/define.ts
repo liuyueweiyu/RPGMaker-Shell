@@ -1,0 +1,1 @@
+export const STYLE_TYPE_NODE_DEFAULT = "NODE_DEFAULT";

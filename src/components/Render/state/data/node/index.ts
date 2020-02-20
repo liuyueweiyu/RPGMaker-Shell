@@ -11,12 +11,14 @@ class Node {
     private nodeType : number;        // 节点类型
     private widgets : Array<Widegt>;  // 渲染类型
     private canReach : boolean = true;
-    constructor(x: number,y : number,nodeType : number) {
+    private styleType : string = "";
+    constructor(x: number,y : number,nodeType : number,styleType:string) {
         this.id = getNewID(); 
         this.x = x;
         this.y = y;
         this.nodeType = nodeType;
         this.widgets = [];
+        this.styleType = styleType;
     }
     
     addWidget(w:Widegt) {
@@ -46,7 +48,7 @@ class Node {
             y : this.y,
             w : NODE_WIDTH,
             h : NODE_HEIGHT,
-            style : engine.style.getStyle("normal") as Style,
+            style : engine.style.getStyle(this.styleType) as Style,
         }
     }
 }

@@ -25,9 +25,7 @@ class RenderBridge {
         } 
     }
     end() {
-        console.log("bridget endddddddddddddddd")
         drawRectangles(engine.canvas as HTMLCanvasElement,this.shadelist);
-        // test(engine.canvas as HTMLCanvasElement,this.shadelist,[255,0,0,1]);
     }
 }
 

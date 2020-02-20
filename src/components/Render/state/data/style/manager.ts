@@ -2,12 +2,13 @@ import { drawRectangle } from '../../../webgl';
 import { engine } from '../../engine';
 import { Style } from '.';
 import { strToColor } from './util';
+import { 
+    STYLE_TYPE_NODE_DEFAULT
+ } from './define';
+
 interface Func {
     (x:number,y:number,w:number,h:number):any
 }
-
-
-
 class StyleManager {
     
     private styleMap:Map<string,Style> = new Map();
@@ -15,15 +16,10 @@ class StyleManager {
         this.registerStyle();
     }
     registerStyle() {
-        this.styleMap.set("normal",{
-            backgound : strToColor("#FFFF00"),
-            borderColor : strToColor("#FF0000"),
-            borderSize : 3
-        })
-        this.styleMap.set("err",{
-            backgound : strToColor("#124567"),
-            borderColor : strToColor("#000000"),
-            borderSize : 0
+        this.styleMap.set(STYLE_TYPE_NODE_DEFAULT,{
+            backgound : strToColor("#A9CDA7"),
+            borderColor : strToColor("#FFFFFF"),
+            borderSize : 0.5
         })
     }
 

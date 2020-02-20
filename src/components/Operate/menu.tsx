@@ -4,6 +4,7 @@ import { Modal,InputNumber } from 'antd';
 import  store from '../../redux';
 import { addProjectAction, addFileAction } from '../../redux/anction';
 import { LOCALSTORAFE_ITEM_MAP } from '../Render/constant/project';
+import { engine } from '../Render/state/engine';
 
 function GameMenu() {
     const [current, setCurrent] = useState("");
@@ -14,6 +15,13 @@ function GameMenu() {
         setAddProjectFlag(false);
         store.dispatch(addProjectAction(addProjectText));
         setAddProjectText("");
+    }
+
+    const save = ()=>{
+        const state = store.getState();
+        state.openedMapFile = 0;
+        state.openedProject = 0;
+        localStorage.setItem(LOCALSTORAFE_ITEM_MAP,JSON.stringify(state))
     }
 
     const [addFileFlag, setAddFileFlag] = useState(false);
@@ -45,7 +53,7 @@ function GameMenu() {
                     <Icon type="file" />
                     新建地图文件
                 </Menu.Item>
-                <Menu.Item key="save" onClick={()=>{localStorage.setItem(LOCALSTORAFE_ITEM_MAP,JSON.stringify(store.getState()))}}>
+                <Menu.Item key="save" onClick={save}>
                     <Icon type="save" />
                     保存文件
                 </Menu.Item>

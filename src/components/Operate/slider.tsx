@@ -17,7 +17,7 @@ function Sider() {
       setList(store.getState().projects)
     }
     if(store.getState().openedProject !== openProject){
-      setOpenedProject(openProject);
+      setOpenedProject(store.getState().openedProject );
     }
   })
   const handleClick = (e:any )=> {

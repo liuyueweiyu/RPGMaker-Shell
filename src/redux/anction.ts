@@ -27,7 +27,7 @@ export function addFileAction(name:string, row:number ,column:number , projectId
     return {
         type : ACTION_TYPE_ADD_FILE,
         name : name,
-        rou : row,
+        row : row,
         column : column,
         projectId : projectId
     }

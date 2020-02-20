@@ -24,6 +24,4 @@ export const engine : Engine = {
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
     drawRectangle(canvas,0,0,canvas.width,canvas.height,WINDOW_CANVAS_BACKGROUND_COLOR);
-    engine.map.createMap(35,25);
-    engine.map.renderMap();
 }

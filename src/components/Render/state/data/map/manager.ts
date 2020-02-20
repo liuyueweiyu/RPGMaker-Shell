@@ -7,15 +7,16 @@ import { RENDER_TICK_TYPE_ADD_SHAPE } from '../../../constant/bridge';
 import { STYLE_TYPE_NODE_DEFAULT } from '../style/define';
 
 class MapManager {
-    nodes : Map<number,Node> = new Map()
+    nodes : Map<number,Node> = new Map();
+    nodesPostion : Array<number> = [];
     createMap(row : number,column: number) {
         if(engine.canvas?.width && engine.canvas?.height) {
             const startX = (engine.canvas?.width - row * NODE_WIDTH) / 2;
             const startY = (engine.canvas?.height - column * NODE_HEIGHT) / 2;
-            // const startY = 0,startX = 0;
             for (let i = 0; i < row; i++) {
                 for (let j = 0; j < column; j++) {
                     const node = new Node(startX + i * NODE_WIDTH, startY + j * NODE_HEIGHT , NODE_TYPE_GRASS,STYLE_TYPE_NODE_DEFAULT);
+                    this.nodesPostion.push(node.getId());
                     this.nodes.set(node.getId(),node);
                 }
             }

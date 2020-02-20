@@ -1,8 +1,7 @@
 import { ResponseData,NewSuccess } from './response';
 import { MESSAGE_CODE_HAS_EXITED,MESSAGE_CODE_NOT_EXIT } from '../../constant/code';
 
-import testInit from './definite/test';
-
+import { initDefine } from '../api/definite';
 interface CBFunc {
     (data:any) : ResponseData;
 }
@@ -13,7 +12,7 @@ interface Func {
 
 class APIManager {
     constructor(){
-        testInit(this);
+        initDefine(this)
     }
     private APIMap:Map<string,CBFunc> = new Map();
     private cbMap:Map<string,Func> = new Map();
@@ -33,14 +32,16 @@ class APIManager {
     }
     triggerCallBack(name:string,data:any) {
         const cb = this.cbMap.get(name);
+        let res = null;
         if(cb){
-            const res = cb(data);
+            res = cb(data);
             console.log(`trigger callback [${name}],参数为:${JSON.stringify(data)},返回值为:${JSON.stringify(res)}`);
-        }
-        const res : ResponseData = {
-            code : MESSAGE_CODE_NOT_EXIT,
-            msg : `callback[${name}] not exit`,
-            data : null
+        } else {
+            res  = {
+                code : MESSAGE_CODE_NOT_EXIT,
+                msg : `callback[${name}] not exit`,
+                data : null
+            }
         }
         console.log(res)
     }
@@ -62,15 +63,18 @@ class APIManager {
     
     callAPICallBack(name:string,data:any,callback:Func) {
         const cb = this.APIMap.get(name);
+        let res = null;
         if(cb) {
-            const res = cb(data);
+            res = cb(data);
             console.log(`callAPI[${name}],参数为:${JSON.stringify(data)},返回值为:${JSON.stringify(res)}`);
+        } else {
+            res  = {
+                code : MESSAGE_CODE_NOT_EXIT,
+                msg : `APIcallback[${name}] not exit`,
+                data : null
+            }
         }
-        const res : ResponseData = {
-            code : MESSAGE_CODE_NOT_EXIT,
-            msg : `APIcallback[${name}] not exit`,
-            data : null
-        }
+        
         callback(res);
     }
 }

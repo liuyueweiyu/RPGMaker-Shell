@@ -17,9 +17,9 @@ class MapManager {
         if(engine.canvas?.width && engine.canvas?.height) {
             const startX = (engine.canvas?.width - column * NODE_WIDTH) / 2;
             const startY = (engine.canvas?.height - row * NODE_HEIGHT) / 2;
-            for (let i = 0; i < column; i++) {
-                for (let j = 0; j < row; j++) {
-                    const node = new Node(startX + i * NODE_WIDTH, startY + j * NODE_HEIGHT , NODE_TYPE_GRASS,STYLE_TYPE_NODE_DEFAULT);
+            for (let i = 0; i < row; i++) {
+                for (let j = 0; j < column; j++) {
+                    const node = new Node(startX + j * NODE_WIDTH, startY + i * NODE_HEIGHT , NODE_TYPE_GRASS,STYLE_TYPE_NODE_DEFAULT);
                     nodesPostion.push(node.getId());
                     nodes.set(node.getId(),node);
                 }

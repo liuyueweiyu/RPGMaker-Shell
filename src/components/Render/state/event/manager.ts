@@ -4,11 +4,22 @@ import store from "../../../../redux";
 import { MapFile } from "../../../Project/file";
 import { engine } from "../engine";
 import { NODE_HEIGHT, NODE_WIDTH } from "../../constant/node";
+import { STYLE_TYPE_NODE_DEFAULT_HOVER } from "../data/style/define";
+import { throttle } from 'lodash';
 export default class EventManager {
     OnClick : ReactEventHandler = (e) => {
         const [x , y] = this.getXY(e);
         this.getTargetNode(x,y);
     }
+
+    onHover : ReactEventHandler = (e) => {
+        const [x, y] = this.getXY(e);
+        const node = this.getTargetNode(x,y);
+        if(node) {
+            node.setStyleType(STYLE_TYPE_NODE_DEFAULT_HOVER);
+        }
+    }
+    OnHover = throttle(this.onHover,100);
 
     getXY(e:React.SyntheticEvent<Element, Event>) {
         // @ts-ignore

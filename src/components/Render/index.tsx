@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { initEngine, engine } from './state/engine';
-// import {  commonShape } from './webgi-utils/shaders/shape';
-// import { commonTexture } from './webgi-utils/shaders/texture';
-// import { initTexture } from './webgi-utils/index';
-// import { getWebGLContext } from './webgi-utils/base';
-// import { setRectangle } from './webgi-utils/utils';
 export interface Props {
     width : number|string;
     height : number|string;
@@ -18,7 +13,7 @@ function Render({width,height} : Props) {
         initEngine(canvas);
     })
     return (
-        <canvas id="webgl" style={{float:"left"}} onClick={engine.event.OnClick} width={width} height={height}>
+        <canvas id="webgl" style={{float:"left"}} onClick={engine.event.OnClick} onMouseMove={engine.event.OnHover} width={width} height={height}>
             浏览器不支持画布
         </canvas>
     )

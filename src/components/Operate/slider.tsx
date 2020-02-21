@@ -1,11 +1,11 @@
 import { Menu } from 'antd';
 import React,{ useState } from 'react';
 import store from '../../redux/index';
-import { setOpenedProjectAction, openFileAction } from '../../redux/anction';
 import { Project } from '../Project/project';
 import { MapFile } from '../Project/file';
+import { setOpenedProjectAction } from '../../redux/actions/projects';
+import { openFileAction } from '../../redux/actions/file';
 const { SubMenu } = Menu;
-
 
 function Sider() {
   const [current, setCurrent] = useState('')

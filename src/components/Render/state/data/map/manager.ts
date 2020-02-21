@@ -26,7 +26,6 @@ class MapManager {
                 }
             }
         }
-        console.log(nodes)
         return [nodes,nodesPostion];
     }
 

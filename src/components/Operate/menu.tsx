@@ -2,11 +2,11 @@ import { Menu, Icon, Input, message } from 'antd';
 import React,{ useState } from 'react';
 import { Modal,InputNumber } from 'antd';
 import  store from '../../redux';
-import { addProjectAction, addFileAction } from '../../redux/anction';
 import { LOCALSTORAFE_ITEM_MAP } from '../Render/constant/project';
 import { engine } from '../Render/state/engine';
 import { StateToJson } from '../Render/state/data/map/util';
-
+import { addFileAction } from '../../redux/actions/file';
+import { addProjectAction } from '../../redux/actions/projects';
 function GameMenu() {
     const [current, setCurrent] = useState("");
     

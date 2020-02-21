@@ -2,7 +2,8 @@ import { Style } from '.';
 import { strToColor } from './util';
 import { 
     STYLE_TYPE_NODE_DEFAULT,
-    STYLE_TYPE_NODE_DEFAULT_HOVER
+    STYLE_TYPE_NODE_DEFAULT_HOVER,
+    STYLE_TYPE_NODE_DEFAULT_ACTIVE
  } from './define';
 
 interface Func {
@@ -34,6 +35,16 @@ class StyleManager {
                 bottom : 0.5,
                 top : 0.5
             }
+        })
+        this.styleMap.set(STYLE_TYPE_NODE_DEFAULT_ACTIVE,{
+            backgound : strToColor("#A9CDA7"),
+            borderColor : strToColor("#FF0000"),
+            borderSize : {
+                right : 0.5,
+                left : 0.5,
+                bottom : 0.5,
+                top : 0.5
+            }          
         })
     }
 

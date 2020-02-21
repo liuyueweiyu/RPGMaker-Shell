@@ -4,8 +4,8 @@ import store from "../../../../redux";
 import { MapFile } from "../../../Project/file";
 import { engine } from "../engine";
 import { NODE_HEIGHT, NODE_WIDTH } from "../../constant/node";
-import { STYLE_TYPE_NODE_DEFAULT_HOVER } from "../data/style/define";
 import { throttle } from 'lodash';
+import { addHoverNodeAction } from "../../../../redux/actions/nodes";
 export default class EventManager {
     OnClick : ReactEventHandler = (e) => {
         const [x , y] = this.getXY(e);
@@ -16,7 +16,7 @@ export default class EventManager {
         const [x, y] = this.getXY(e);
         const node = this.getTargetNode(x,y);
         if(node) {
-            node.setStyleType(STYLE_TYPE_NODE_DEFAULT_HOVER);
+            store.dispatch(addHoverNodeAction(node))
         }
     }
     OnHover = throttle(this.onHover,100);

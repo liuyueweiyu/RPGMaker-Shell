@@ -125,8 +125,8 @@ function GameMenu() {
                 <Input onChange={(e)=>{setAddFileText(e.target.value)}} placeholder="请输入文件名称" />
                 <br />
                 <br />
-                创建地图规格： <InputNumber min={1} max={1000} onChange={(value)=>{value && setMapRow(value)}}/>(行) 
-                x  <InputNumber min={1} max={1000}  onChange={(value)=>{value && setMapColumn(value)}} /> (列)
+                创建地图规格： <InputNumber min={1} max={20} onChange={(value)=>{value && setMapRow(value)}}/>(行) 
+                x  <InputNumber min={1} max={20}  onChange={(value)=>{value && setMapColumn(value)}} /> (列)
             </Modal>
         </React.Fragment>
 

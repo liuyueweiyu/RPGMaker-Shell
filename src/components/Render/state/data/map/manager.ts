@@ -9,6 +9,9 @@ import { MapFile } from '../../../../Project/file';
 class MapManager {
     nodes : Map<number,Node> = new Map();
     nodesPos : Array<number> = [];
+    requestID  = -1;
+    count = 0;
+    renderFlag = false;
     createMap(row : number,column: number) {
         const nodes : Map<number,Node> = new Map();
         const nodesPostion : Array<number> = [];
@@ -30,10 +33,12 @@ class MapManager {
     openFile(mf:MapFile) {
         this.nodes = mf.nodes;
         this.nodesPos = mf.nodesPos;
-        this.renderMap();
+        this.renderFlag = true;
+        this.requestID = requestAnimationFrame(this.renderMap.bind(this));
     }
 
     renderMap() {
+        console.log("renderMap",this.count++);
         const bridge = new RenderBridge();
         bridge.start();
         
@@ -44,6 +49,12 @@ class MapManager {
             });
         })
         bridge.end();
+
+        if(!this.renderFlag) {
+            cancelAnimationFrame(this.requestID);
+        } else {
+            this.requestID = requestAnimationFrame(this.renderMap.bind(this))
+        }
     }
 }
 

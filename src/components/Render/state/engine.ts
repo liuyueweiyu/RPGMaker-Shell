@@ -5,12 +5,14 @@ import { drawRectangle } from '../webgl';
 import StyleManager from './data/style/manager';
 import MapFile from '../state/data/map/manager';
 import { WINDOW_CANVAS_BACKGROUND_COLOR } from '../constant/window';
+import EventManager from './event/manager';
 export interface Engine {
     canvas : HTMLCanvasElement | null;
     api : APIManager ;
     widgets : WidegtManager;
     map : MapFile;
     style : StyleManager;
+    event : EventManager;
 }
 
 export const engine : Engine = {
@@ -18,7 +20,8 @@ export const engine : Engine = {
     api : new APIManager(),
     widgets : new WidegtManager(),
     map: new MapFile(),
-    style : new StyleManager()
+    style : new StyleManager(),
+    event : new EventManager()
 }
 
 export function initEngine(canvas:HTMLCanvasElement) {

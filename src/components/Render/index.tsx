@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { initEngine } from './state/engine';
+import { initEngine, engine } from './state/engine';
 // import {  commonShape } from './webgi-utils/shaders/shape';
 // import { commonTexture } from './webgi-utils/shaders/texture';
 // import { initTexture } from './webgi-utils/index';
@@ -16,13 +16,9 @@ function Render({width,height} : Props) {
     useEffect(()=>{
         const canvas = document.getElementById('webgl') as HTMLCanvasElement;
         initEngine(canvas);
-        // engine.api.callAPICallBack("test",{data:'hsh'},(data)=>{
-        //     console.log(data)
-        // })
-       
     })
     return (
-        <canvas id="webgl" style={{float:"left"}} width={width} height={height}>
+        <canvas id="webgl" style={{float:"left"}} onClick={engine.event.OnClick} width={width} height={height}>
             浏览器不支持画布
         </canvas>
     )

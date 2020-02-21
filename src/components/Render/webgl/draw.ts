@@ -2,6 +2,7 @@ import Shader from './shaders/interface';
 import { DrawData, AttributeData, UniformData, ViewData } from './drawData';
 import { setAttributes, createProgramWithShaderObj, createTexture ,getWebGLContext,setUniforms,drawArrays } from './base';
 import { setRectangle, ColorToArray,RGBA256toWebglColor, getBorderPoint } from './utils';
+import { NODE_WIDTH, NODE_HEIGHT } from '../constant/node';
 export function initShape(canvas: HTMLCanvasElement, shader: Shader,data : DrawData) {
     const gl = getWebGLContext(canvas);
     const program = createProgramWithShaderObj(gl ,shader);
@@ -37,10 +38,15 @@ export function initBatchOfShape(canvas: HTMLCanvasElement,shader: Shader, data:
             }
         }]);
         data.forEach(v=>{
-            const r = v.style.borderSize;
+            let border = v.style.borderSize;
+            if(!border) {
+                border = {
+                    right : 0, left : 0, top : 0,bottom : 0
+                }
+            }
             const attribute :AttributeData = {
                 name : 'a_Position',
-                data : setRectangle(v.x + r,v.y + r,v.w - 2*r,v.h- 2*r),
+                data : setRectangle(v.x + border.left,v.y + border.top,v.w - border.left-border.right,v.h- border.top - border.bottom),
                 dataType : 'Float32Array',
                 normalize : false,
                 size : 2,
@@ -62,8 +68,9 @@ export function initBatchOfShape(canvas: HTMLCanvasElement,shader: Shader, data:
                 count:attribute.data.length / 2
             });
             // 绘制border
-            if(r !== 0) {
-                attribute.data = getBorderPoint(v.x,v.y,v.w,v.h,r);
+            attribute.data = getBorderPoint(v,NODE_WIDTH,NODE_HEIGHT);
+            console.log("data",attribute.data.length)
+            if(attribute.data.length !== 0) {
                 setAttributes(gl,program,[attribute]);
                 uniform.data = RGBA256toWebglColor(ColorToArray(v.style.borderColor));
                 setUniforms(gl,program,[uniform]);

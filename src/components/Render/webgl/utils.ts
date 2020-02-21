@@ -1,5 +1,5 @@
 import { createTexture } from './base';
-import { AttributeData } from './drawData';
+import { AttributeData, ViewData } from './drawData';
 import { Color } from '../state/data/style/color';
 export function resizeCanvasToDisplaySize(canvas:HTMLCanvasElement, multiplier :number) {
     multiplier = multiplier || 1;
@@ -60,13 +60,55 @@ export function setRectangle(x:number, y:number, width:number, height:number) {
  ];
 }
 
-export function getBorderPoint(x:number,y:number,w:number,h:number,r:number) {
+export function getBorderPoint(v:ViewData,w:number,h:number) {
+    const border = v.style.borderSize;
     const arr = [];
-    arr.push(...setRectangle(x,y,r,h));
-    arr.push(...setRectangle(x+r,y,w-r*2,r));
-    arr.push(...setRectangle(x+w-r,y,r,h));
-    arr.push(...setRectangle(x+r,y+h-r,w-r*2,r));
+    if(border) {
+      if(border.top !== 0) {
+        arr.push(...getQuadrilateralPoint(
+          v.x,v.y,
+          v.x+border.left,v.y+border.top,
+          v.x+w,v.y,
+          v.x+w-border.right,v.y+border.top
+        ));
+      }
+      if(border.left !== 0) {
+        arr.push(...getQuadrilateralPoint(
+          v.x,v.y,
+          v.x+border.left,v.y+border.top,
+          v.x,v.y+h,
+          v.x+border.left,v.y+h-border.bottom
+        ));
+      }
+      if(border.right !== 0) {
+        arr.push(...getQuadrilateralPoint(
+          v.x + w,v.y,
+          v.x+w-border.right,v.y+border.top,
+          v.x + w,v.y + h,
+          v.x+w-border.right,v.y+h -border.bottom
+        ))
+      }
+      if(border.bottom !== 0) {
+        arr.push(...getQuadrilateralPoint(
+          v.x,v.y+h,
+          v.x+border.left,v.y+h-border.bottom,
+          v.x + w,v.y + h,
+          v.x+w-border.right,v.y+h - border.bottom
+        ))
+      }
+    }
     return arr;
+}
+
+export function getQuadrilateralPoint(x1:number,y1:number,x2:number,y2:number,x3:number,y3:number,x4:number,y4:number){
+    return [
+      x1,y1,
+      x2,y2,
+      x3,y3,
+      x2,y2,
+      x3,y3,
+      x4,y4
+    ]
 }
 
 export function RGBA256toWebglColor(colors:Array<number>) {

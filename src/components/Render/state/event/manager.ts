@@ -5,8 +5,6 @@ import { MapFile } from "../../../Project/file";
 import { engine } from "../engine";
 import { NODE_HEIGHT, NODE_WIDTH } from "../../constant/node";
 export default class EventManager {
-    constructor() {}
-
     OnClick : ReactEventHandler = (e) => {
         const [x , y] = this.getXY(e);
         this.getTargetNode(x,y);

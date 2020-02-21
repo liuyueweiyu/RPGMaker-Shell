@@ -1,7 +1,6 @@
 import { getNewID } from '../Generator/id';
 import { Project } from './project';
 import { engine } from '../Render/state/engine';
-import store from '../../redux';
 import  Node from '../Render/state/data/node';
 export interface MapFile {
     id : number;

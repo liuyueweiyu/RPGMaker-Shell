@@ -1,5 +1,3 @@
-import { drawRectangle } from '../../../webgl';
-import { engine } from '../../engine';
 import { Style } from '.';
 import { strToColor } from './util';
 import { 
@@ -19,7 +17,12 @@ class StyleManager {
         this.styleMap.set(STYLE_TYPE_NODE_DEFAULT,{
             backgound : strToColor("#A9CDA7"),
             borderColor : strToColor("#FFFFFF"),
-            borderSize : 0.5
+            borderSize : {
+                right : 0.5,
+                left : 0.5,
+                bottom : 0.5,
+                top : 0.5
+            }
         })
     }
 

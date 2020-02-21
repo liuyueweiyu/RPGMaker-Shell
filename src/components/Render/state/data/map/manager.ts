@@ -10,7 +10,6 @@ class MapManager {
     nodes : Map<number,Node> = new Map();
     nodesPos : Array<number> = [];
     requestID  = -1;
-    count = 0;
     renderFlag = false;
     createMap(row : number,column: number) {
         const nodes : Map<number,Node> = new Map();
@@ -37,7 +36,6 @@ class MapManager {
     }
 
     renderMap() {
-        console.log("renderMap",this.count++);
         const bridge = new RenderBridge();
         bridge.start();
         

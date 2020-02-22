@@ -5,23 +5,27 @@ import { MapFile } from "../../../Project/file";
 import { engine } from "../engine";
 import { NODE_HEIGHT, NODE_WIDTH } from "../../constant/node";
 import { throttle } from 'lodash';
-import { addHoverNodeAction } from "../../../../redux/actions/nodes";
+import { addHoverNodeAction, addActiveNodeAction } from "../../../../redux/actions/nodes";
 export default class EventManager {
     OnClick : ReactEventHandler = (e) => {
         const [x , y] = this.getXY(e);
-        this.getTargetNode(x,y);
+        const node = this.getTargetNode(x,y);
+        if(node) {
+            store.dispatch(addActiveNodeAction(node,false));
+        }
     }
 
     onHover : ReactEventHandler = (e) => {
-        const [x, y] = this.getXY(e);
-        const node = this.getTargetNode(x,y);
-        if(node) {
-            store.dispatch(addHoverNodeAction(node))
-        }
+        // const [x, y] = this.getXY(e);
+        // const node = this.getTargetNode(x,y);
+        // if(node) {
+        //     store.dispatch(addHoverNodeAction(node))
+        // }
     }
     OnHover = throttle(this.onHover,100);
 
     getXY(e:React.SyntheticEvent<Element, Event>) {
+        e.persist();
         // @ts-ignore
         return [e.clientX - WINDOW_DASHBORD_WIDTH,e.clientY - WINDOW_MENU_HEIGHT]
     }
@@ -32,6 +36,9 @@ export default class EventManager {
         const height = engine.canvas?.height || 0;
         const startX = ( width- mf.column * NODE_WIDTH) / 2;
         const startY = ( height - mf.row * NODE_HEIGHT) / 2;
+        if(x < startX || y < startY ){
+            return null;
+        }
         const index = Math.floor(( x - startX ) / NODE_WIDTH) + Math.floor((y - startY) / NODE_HEIGHT) * mf.column;
         return engine.map.nodes.get(engine.map.nodesPos[index])
         

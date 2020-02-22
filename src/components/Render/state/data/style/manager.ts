@@ -30,10 +30,10 @@ class StyleManager {
             backgound : strToColor("#A9CDA7"),
             borderColor : strToColor("#000000"),
             borderSize : {
-                right : 0.5,
-                left : 0.5,
-                bottom : 0.5,
-                top : 0.5
+                right : 4,
+                left : 4,
+                bottom : 4,
+                top : 4
             }
         })
         this.styleMap.set(STYLE_TYPE_NODE_DEFAULT_ACTIVE,{

@@ -1,11 +1,11 @@
 import Node from '../../components/Render/state/data/node';
 
 export const ACTION_TYPE_ADD_ACTIVE_NODE = "ADD_ACTIVE_NODE";
-export function addActiveNodeAction(node : Node, isMuti :boolean) {
+export function addActiveNodeAction(node : Node, isAppend :boolean) {
     return {
         type : ACTION_TYPE_ADD_ACTIVE_NODE,
         node : node,
-        isMuti
+        isAppend
     }
 }
 

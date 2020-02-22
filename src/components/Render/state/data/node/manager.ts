@@ -22,20 +22,20 @@ class NodeManager {
         return state;
     }
 
-    addActiveNode(state:any,node:Node,isMuti:boolean) {
+    addActiveNode(state:any,node:Node,isAppend:boolean) {
         if(!node) {
             return state;
         }
         if(!state.nodes) {
             state.nodes = [];
         }
-        if(state.status === NODE_HOVER_STATUS || !isMuti) {
+        if(state.status === NODE_HOVER_STATUS || !isAppend) {
             state.nodes.forEach((node:Node)=>{
                 node.setStyleType(STYLE_TYPE_NODE_DEFAULT);
             })
             state.nodes = [node];
         }
-        if(state.status === NODE_ACTIVE_STATUS && isMuti) {
+        if(state.status === NODE_ACTIVE_STATUS && isAppend) {
             state.nodes.push(node);
         }
         node.setStyleType(STYLE_TYPE_NODE_DEFAULT_ACTIVE);

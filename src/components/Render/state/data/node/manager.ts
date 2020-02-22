@@ -29,16 +29,16 @@ class NodeManager {
         if(!state.nodes) {
             state.nodes = [];
         }
-        node.setStyleType(STYLE_TYPE_NODE_DEFAULT_ACTIVE);
         if(state.status === NODE_HOVER_STATUS || !isMuti) {
             state.nodes.forEach((node:Node)=>{
                 node.setStyleType(STYLE_TYPE_NODE_DEFAULT);
             })
             state.nodes = [node];
         }
-        if(state.status === NODE_ACTIVE_STATUS) {
+        if(state.status === NODE_ACTIVE_STATUS && isMuti) {
             state.nodes.push(node);
         }
+        node.setStyleType(STYLE_TYPE_NODE_DEFAULT_ACTIVE);
         state.status = NODE_ACTIVE_STATUS;
         return state;
     }

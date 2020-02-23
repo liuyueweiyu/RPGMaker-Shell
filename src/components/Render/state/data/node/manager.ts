@@ -6,41 +6,46 @@ import {
 } from '../style/define';
 import { NODE_ACTIVE_STATUS,NODE_HOVER_STATUS } from '../../../constant/node';
 class NodeManager {
-    addHoverNode(state:any,node:Node) {
-        if(!node) {
+    addHoverNode(state:any,nodes:Array<Array<Node>>) {
+        if(!nodes) {
             return state;
         }
         if(!state.nodes) {
-            state.nodes = [];
+            state.nodes = [[]];
         }
-        node.setStyleType(STYLE_TYPE_NODE_DEFAULT_HOVER);
-        state.nodes.forEach((node:Node)=>{
-            node.setStyleType(STYLE_TYPE_NODE_DEFAULT);
-        })
+        this.setNodesStyle(state.nodes,STYLE_TYPE_NODE_DEFAULT);
+        this.setNodesStyle(nodes,STYLE_TYPE_NODE_DEFAULT_HOVER);
         state.status = NODE_HOVER_STATUS;
-        state.nodes = [node];
+        state.nodes = nodes;
         return state;
     }
 
-    addActiveNode(state:any,node:Node,isAppend:boolean) {
-        if(!node) {
+    addActiveNode(state:any,nodes:Array<Array<Node>>,isAppend:boolean) {
+        if(!nodes) {
             return state;
         }
         if(!state.nodes) {
-            state.nodes = [];
+            state.nodes = [[]];
         }
         if(state.status === NODE_HOVER_STATUS || !isAppend) {
-            state.nodes.forEach((node:Node)=>{
-                node.setStyleType(STYLE_TYPE_NODE_DEFAULT);
-            })
-            state.nodes = [node];
+            this.setNodesStyle(state.nodes,STYLE_TYPE_NODE_DEFAULT);
+            this.setNodesStyle(nodes,STYLE_TYPE_NODE_DEFAULT_ACTIVE);
+            state.nodes = nodes;
         }
         if(state.status === NODE_ACTIVE_STATUS && isAppend) {
-            state.nodes.push(node);
+            // state.nodes.push(node);
+            // ... anppend todo
         }
-        node.setStyleType(STYLE_TYPE_NODE_DEFAULT_ACTIVE);
         state.status = NODE_ACTIVE_STATUS;
         return state;
+    }
+
+    setNodesStyle(nodes:Array<Array<Node>>,styleType:string) {
+        nodes.forEach(list=>{
+            list.forEach(n=>{
+                n.setStyleType(styleType);
+            })
+        })
     }
 }
 

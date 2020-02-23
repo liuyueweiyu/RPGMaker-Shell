@@ -9,9 +9,10 @@ import { addHoverNodeAction, addActiveNodeAction } from "../../../../redux/actio
 export default class EventManager {
     OnClick : ReactEventHandler = (e) => {
         const [x , y] = this.getXY(e);
-        const node = this.getTargetNode(x,y);
-        if(node) {
-            store.dispatch(addActiveNodeAction(node,false));
+        const nodes = this.getTargetNode(x,y,3,2);
+        if(nodes) {
+            //@ts-ignore
+            store.dispatch(addActiveNodeAction(nodes,false));
         }
     }
 
@@ -30,17 +31,31 @@ export default class EventManager {
         return [e.clientX - WINDOW_DASHBORD_WIDTH,e.clientY - WINDOW_MENU_HEIGHT]
     }
 
-    getTargetNode(x:number,y:number) {
+    getTargetNode(x:number,y:number,boxWidth = 1,boxHeight = 1):Array<Array<Node>> {
         const mf : MapFile = store.getState().openedMapFile as MapFile;
         const width = engine.canvas?.width || 0;
         const height = engine.canvas?.height || 0;
         const startX = ( width- mf.column * NODE_WIDTH) / 2;
         const startY = ( height - mf.row * NODE_HEIGHT) / 2;
         if(x < startX || y < startY ){
-            return null;
+            return [[]];
         }
         const index = Math.floor(( x - startX ) / NODE_WIDTH) + Math.floor((y - startY) / NODE_HEIGHT) * mf.column;
-        return engine.map.nodes.get(engine.map.nodesPos[index])
+        const nodes : Array<Array<Node>> = [];
+        const nodesPos = engine.map.nodesPos;
+        const nodesMap = engine.map.nodes;
+        for (let i = 0; i < boxHeight; i++) {
+            const list : Array<Node> = [];
+            for (let j = 0; j < boxWidth; j++) {
+                const id = nodesPos[index+j+i*mf.column];
+                if(id && nodesMap.get(id)){
+                    // @ts-ignore
+                    list.push(nodesMap.get(id));
+                }
+            }
+            nodes.push(list);
+        }
+        return nodes;
         
     }
 }

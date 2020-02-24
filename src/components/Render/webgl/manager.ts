@@ -3,12 +3,11 @@ import { UniformConfig, Shader, AttributeConfig } from './shaders/interface';
 import { createProgramWithShaderObj, getWebGLContext, drawArrays, setUniformDataWithConfig, setAttributeDataWithConfig } from './base';
 import { WebGLData, DrawArrayData, ViewData } from './drawData';
 import { setUniformData, setBufferData, setRectangle } from './utils';
+import { commonShape } from './shaders/shape';
 export default class WebglManager {
     private program : Map<string,Program> = new Map();
-    private canvas : HTMLCanvasElement| null = null;
     private gl : WebGLRenderingContext | null = null;
     setCanvas(canvas:HTMLCanvasElement) {
-        this.canvas = canvas;
         this.gl = getWebGLContext(canvas);
     }
     getGL() {
@@ -51,35 +50,18 @@ export default class WebglManager {
         }
     }
 
-    private a_position : number = 0;
-    private u_color : WebGLUniformLocation | null = null;
-    private u_resolation : WebGLUniformLocation | null = null;
 
-    test_creatProgram(name:string, shader: Shader,uniformConfig: Array<UniformConfig>,initUniformData:Array<WebGLData>,attributeConfig:Array<AttributeConfig>) {
+    test_runProgram(list:Array<ViewData>) {
         const gl = this.getGL()
-        const program = createProgramWithShaderObj(gl ,shader);
-        if(program) {
-            gl.useProgram(program);
-            this.a_position = gl.getAttribLocation(program,'a_Position');
-            const positionBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-            gl.enableVertexAttribArray(this.a_position);
-            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-            gl.vertexAttribPointer(this.a_position,2,gl.FLOAT,false,0,0);   
-            this.u_color = gl.getUniformLocation(program,'u_color');
-            this.u_resolation = gl.getUniformLocation(program,'u_resolution');
-            gl.uniform2f(this.u_resolation,gl.canvas.width,gl.canvas.height);
-        }
-    }
-
-    test_runProgram(name:string,list:Array<ViewData>) {
-        const gl = this.getGL()
+        // const a_Position =
+        // const
+        const u_color = this.program.get('initBatchOfShape')?.uniforms.get('u_color');
         list.forEach(a=>{
+            if(u_color) {
+                console.log('sss')
+            }
             gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(setRectangle(a.x,a.y,a.w,a.h)),gl.STATIC_DRAW);
-            // Set a random color.
-            gl.uniform4f(this.u_color, Math.random(), Math.random(), Math.random(), 1);
-
-            // Draw the rectangle.
+            gl.uniform4f(u_color?.entity as WebGLUniformLocation, Math.random(), Math.random(), Math.random(), 1);
             var primitiveType = gl.TRIANGLES;
             var offset = 0;
             var count = 6;
@@ -92,9 +74,13 @@ export default class WebglManager {
         const gl = this.getGL()
         const programObj = this.program.get(name);
         if(programObj) {
-            setUniformDataWithConfig(gl,uniformDatas,programObj.uniforms);
-            setAttributeDataWithConfig(gl,attributeDatas,programObj.attributes);
-            drawArrays(gl,data);
+            
+            // console.log(uniformDatas[0].data.length,attributeDatas[0].data.length)
+            // const u_color = this.program.get('initBatchOfShape')?.uniforms.get('u_color');
+            // gl.uniform4f(u_color?.entity as WebGLUniformLocation, Math.random(), Math.random(), Math.random(), 1);
+            // setUniformDataWithConfig(gl,uniformDatas,programObj.uniforms);
+            // setAttributeDataWithConfig(gl,attributeDatas,programObj.attributes);
+            // drawArrays(gl,data);
         }
     }
 

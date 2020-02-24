@@ -46,7 +46,6 @@ class MapManager {
             });
         })
         bridge.end();
-
         if(!this.renderFlag) {
             cancelAnimationFrame(this.requestID);
         } else {

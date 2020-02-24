@@ -1,4 +1,4 @@
-import Shader from './shaders/interface';
+import { Shader } from './shaders/interface';
 import { DrawData, AttributeData, UniformData, ViewData } from './drawData';
 import { setAttributes, createProgramWithShaderObj, createTexture ,getWebGLContext,setUniforms,drawArrays } from './base';
 import { setRectangle, ColorToArray,RGBA256toWebglColor, getBorderPoint } from './utils';
@@ -28,7 +28,7 @@ export function initBatchOfShape(canvas: HTMLCanvasElement,shader: Shader, data:
     if(program) {
         // 绘制时
         gl.useProgram(program);
-        // // 设置所有的缓冲和属性
+        // 设置所有的缓冲和属性 
         setUniforms(gl,program,[{
             name : 'u_resolution',
             type : 'uniform2f',

@@ -4,8 +4,9 @@ import {
     RENDER_TICK_TYPE_UPDATE_SHAPE 
 } from '../../../constant/bridge';
 import { drawRectangles } from '../../../webgl/index';
-import { ViewData } from '../../../webgl/drawData';
+import { ViewData, UniformData } from '../../../webgl/drawData';
 import { engine } from '../../engine';
+import { getAttributeAndUniformWithViewData } from './util';
 export interface RenderTick {
     type : string;
     viewData : ViewData;
@@ -24,7 +25,14 @@ class RenderBridge {
         } 
     }
     end() {
-        drawRectangles(engine.canvas as HTMLCanvasElement,this.shadelist);
+        const [a,u] = getAttributeAndUniformWithViewData(this.shadelist);
+        engine.webgl.runProgram("initBatchOfShape",a,u,{
+            primitiveType:engine.webgl.getGL().TRIANGLES,
+            offset:0,
+            count:a.length / 2
+        });
+        
+        // drawRectangles(engine.canvas as HTMLCanvasElement,this.shadelist);
     }
 }
 

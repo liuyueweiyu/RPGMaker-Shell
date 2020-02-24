@@ -1,6 +1,7 @@
-import Shader from "./shaders/interface";
-import { AttributeData, UniformData,DrawArrayData } from './drawData';
-import { setBufferData, setUniformData } from './utils';
+import { Shader } from "./shaders/interface";
+import { AttributeData, UniformData,DrawArrayData, WebGLData } from './drawData';
+import { setBufferData, setUniformData, dataToArrayBuffer } from './utils';
+import { Uniform, Attribute } from "./program";
 export function getWebGLContext(canvas:HTMLCanvasElement) {
   return (canvas.getContext('webgl') || canvas.getContext('exprimental-wegl')) as WebGLRenderingContext
 }
@@ -82,4 +83,27 @@ export function setUniforms(gl:WebGLRenderingContext,program : WebGLProgram,unif
 
 export function drawArrays(gl:WebGLRenderingContext,data:DrawArrayData) {
   gl.drawArrays(data.primitiveType,data.offset,data.count);
+}
+
+export function setUniformDataWithConfig(gl:WebGLRenderingContext,data:Array<WebGLData>,config:Map<string,Uniform>) {
+  data.forEach(v=>{
+    const uniform = config.get(v.name);
+    if(uniform){
+      setUniformData(gl,uniform.entity,uniform.type,v.data);
+    }
+  })
+}
+
+export function setAttributeDataWithConfig(gl:WebGLRenderingContext,data:Array<WebGLData>,config:Map<string,Attribute>) {
+  data.forEach(v=>{
+    const attribute = config.get(v.name)
+    if(attribute) {
+      const buffer = dataToArrayBuffer(attribute.type, v.data);
+      if(attribute.type !== 'image') {
+        gl.bufferData(gl.ARRAY_BUFFER, buffer ,gl.STATIC_DRAW);
+      } else {
+        createTexture(gl,v.data as HTMLImageElement);
+      }
+    }
+  })
 }

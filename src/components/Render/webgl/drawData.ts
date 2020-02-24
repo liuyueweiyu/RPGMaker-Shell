@@ -6,11 +6,15 @@ export interface DrawData {
     drawdata : DrawArrayData;
 }
 
+export interface WebGLData {
+    name : string,
+    data : any
+}
 
 export interface AttributeData {
     name : string;
     data : any;
-    dataType : string;
+    dataType : string;  //待废弃
     size : number;
     type : number;
     normalize : boolean;
@@ -20,7 +24,7 @@ export interface AttributeData {
 
 export interface UniformData {
     name : string;
-    type : string;
+    type : string; // 待废弃
     data : any;
 }
 

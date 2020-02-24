@@ -1,4 +1,4 @@
-import Shader from './interface';
+import { Shader } from './interface';
 const VERTEX_SHADER_COMMON_SHAPE_SOURCE = `
 attribute vec2 a_Position;
 

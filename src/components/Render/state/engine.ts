@@ -35,25 +35,26 @@ export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
     drawRectangle(canvas,0,0,canvas.width,canvas.height,WINDOW_CANVAS_BACKGROUND_COLOR);
     engine.webgl.setCanvas(canvas);
-    engine.webgl.creatProgram("initBatchOfShape",commonShape,[{
-        name : 'u_resolution',
-        type : 'uniform2f'
-    },{
-        name : 'u_color',
-        type : 'uniform4f'     
-    }],[{
-        name : 'u_resolution',
-        data : {
-            x : engine.webgl.getGL().canvas.width,
-            y : engine.webgl.getGL().canvas.height
-        }
-    }],[{
-        name : 'a_Position',
-        type : 'Float32Array',
-        normalize : false,
-        size : 2,
-        renderType : engine.webgl.getGL().FLOAT,
-        stride : 0,
-        offset : 0
-    }])
+    engine.webgl.test_creatProgram("",commonShape,[],[],[]);
+    // engine.webgl.creatProgram("initBatchOfShape",commonShape,[{
+    //     name : 'u_resolution',
+    //     type : 'uniform2f'
+    // },{
+    //     name : 'u_color',
+    //     type : 'uniform4f'     
+    // }],[{
+    //     name : 'u_resolution',
+    //     data : {
+    //         x : engine.webgl.getGL().canvas.width,
+    //         y : engine.webgl.getGL().canvas.height
+    //     }
+    // }],[{
+    //     name : 'a_Position',
+    //     type : 'Float32Array',
+    //     normalize : false,
+    //     size : 2,
+    //     renderType : engine.webgl.getGL().FLOAT,
+    //     stride : 0,
+    //     offset : 0
+    // }])
 }

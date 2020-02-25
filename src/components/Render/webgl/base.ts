@@ -1,7 +1,7 @@
 import { Shader } from "./shaders/interface";
-import { AttributeData, UniformData,DrawArrayData, WebGLData } from './drawData';
-import { setBufferData, setUniformData, dataToArrayBuffer } from './utils';
-import { Uniform, Attribute } from "./program";
+import { WebGLData } from './drawData';
+import { setUniformData } from './utils';
+import { Uniform } from "./program";
 export function getWebGLContext(canvas:HTMLCanvasElement) {
   return (canvas.getContext('webgl') || canvas.getContext('exprimental-wegl')) as WebGLRenderingContext
 }
@@ -60,30 +60,8 @@ export function createTexture(gl:WebGLRenderingContext,image :HTMLImageElement) 
   return texture;
 }
 
-export function setAttributes(gl:WebGLRenderingContext,program : WebGLProgram,attributes: Array<AttributeData>) {
-  attributes.forEach((v)=>{
-    const attribute = gl.getAttribLocation(program,v.name);
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    setBufferData(gl,v);
-    gl.enableVertexAttribArray(attribute);
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.vertexAttribPointer(attribute,v.size,v.type,v.normalize,v.stride,v.offset);   
-   })
-}
 
-export function setUniforms(gl:WebGLRenderingContext,program : WebGLProgram,uniforms: Array<UniformData>) {
-  uniforms.forEach(v=>{
-    const uniform = gl.getUniformLocation(program,v.name);
-    if(uniform) {
-      setUniformData(gl,uniform,v.type,v.data);
-    }
-  });
-}
 
-export function drawArrays(gl:WebGLRenderingContext,data:DrawArrayData) {
-  gl.drawArrays(data.primitiveType,data.offset,data.count);
-}
 
 export function setUniformDataWithConfig(gl:WebGLRenderingContext,data:Array<WebGLData>,config:Map<string,Uniform>) {
   data.forEach(v=>{
@@ -94,16 +72,16 @@ export function setUniformDataWithConfig(gl:WebGLRenderingContext,data:Array<Web
   })
 }
 
-export function setAttributeDataWithConfig(gl:WebGLRenderingContext,data:Array<WebGLData>,config:Map<string,Attribute>) {
-  data.forEach(v=>{
-    const attribute = config.get(v.name)
-    if(attribute) {
-      const buffer = dataToArrayBuffer(attribute.type, v.data);
-      if(attribute.type !== 'image') {
-        gl.bufferData(gl.ARRAY_BUFFER, buffer ,gl.STATIC_DRAW);
-      } else {
-        createTexture(gl,v.data as HTMLImageElement);
-      }
-    }
-  })
-}
+// export function setAttributeDataWithConfig(gl:WebGLRenderingContext,data:Array<WebGLData>,config:Map<string,Attribute>) {
+//   data.forEach(v=>{
+//     const attribute = config.get(v.name)
+//     if(attribute) {
+//       const buffer = dataToArrayBuffer(attribute.type, v.data);
+//       if(attribute.type !== 'image') {
+//         gl.bufferData(gl.ARRAY_BUFFER, buffer ,gl.STATIC_DRAW);
+//       } else {
+//         createTexture(gl,v.data as HTMLImageElement);
+//       }
+//     }
+//   })
+// }

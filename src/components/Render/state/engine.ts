@@ -1,10 +1,7 @@
-// import { getWebGLContext } from '../webgi-utils/base';
 import APIManager from './api/index';
 import WidegtManager from './data/widget/manager';
-import { drawRectangle } from '../webgl';
 import StyleManager from './data/style/manager';
 import MapFile from '../state/data/map/manager';
-import { WINDOW_CANVAS_BACKGROUND_COLOR } from '../constant/window';
 import EventManager from './event/manager';
 import NodeManager from './data/node/manager';
 import WebglManager from '../webgl/manager';
@@ -33,7 +30,7 @@ export const engine : Engine = {
 
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
-    drawRectangle(canvas,0,0,canvas.width,canvas.height,WINDOW_CANVAS_BACKGROUND_COLOR);
+    // drawRectangle(canvas,0,0,canvas.width,canvas.height,WINDOW_CANVAS_BACKGROUND_COLOR);
     engine.webgl.setCanvas(canvas);
     // engine.webgl.test_creatProgram();
     engine.webgl.creatProgram("initBatchOfShape",commonShape,[{

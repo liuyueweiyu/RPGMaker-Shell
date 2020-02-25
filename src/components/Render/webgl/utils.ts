@@ -1,5 +1,4 @@
-import { createTexture } from './base';
-import { AttributeData, ViewData } from './drawData';
+import { ViewData } from './drawData';
 import { Color } from '../state/data/style/color';
 export function resizeCanvasToDisplaySize(canvas:HTMLCanvasElement, multiplier :number) {
     multiplier = multiplier || 1;
@@ -13,24 +12,15 @@ export function resizeCanvasToDisplaySize(canvas:HTMLCanvasElement, multiplier :
     return false;
 }
 
-export function dataToArrayBuffer(type:string, data:any) {
-  switch (type) {
-    case 'Float32Array':
-      return new Float32Array(data); 
-    default:
-      break;
-  }
-  return new ArrayBuffer(0);
-}
 
-export function setBufferData(gl:WebGLRenderingContext,v:AttributeData) {
-  const buffer = dataToArrayBuffer(v.dataType, v.data);
-  if(v.dataType !== 'image') {
-    gl.bufferData(gl.ARRAY_BUFFER, buffer ,gl.STATIC_DRAW);
-  } else {
-    createTexture(gl,v.data as HTMLImageElement);
-  }
-}
+// export function setBufferData(gl:WebGLRenderingContext,v:AttributeData) {
+//   const buffer = dataToArrayBuffer(v.dataType, v.data);
+//   if(v.dataType !== 'image') {
+//     gl.bufferData(gl.ARRAY_BUFFER, buffer ,gl.STATIC_DRAW);
+//   } else {
+//     createTexture(gl,v.data as HTMLImageElement);
+//   }
+// }
 
 export function setUniformData(gl:WebGLRenderingContext,uniform:WebGLUniformLocation,type:string,data:any) {
   switch (type) {
@@ -111,20 +101,11 @@ export function getQuadrilateralPoint(x1:number,y1:number,x2:number,y2:number,x3
     ]
 }
 
-export function RGBA256toWebglColor(colors:Array<number>) {
+export function ColorToWebglColor(color:Color) {
   return {
-    x : (colors[0] || 0) / 256,
-    y : (colors[1] || 1) / 256,
-    z : (colors[2] || 2) / 256,
-    w : (colors[3] === undefined ? 1 : colors[3])
+    x : (color.r || 0) / 256,
+    y : (color.g || 1) / 256,
+    z : (color.b || 2) / 256,
+    w : (color.a === undefined ? 1 : color.a)
   }
-}
-
-export function ColorToArray(color :Color) {
-  return [
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  ]
 }

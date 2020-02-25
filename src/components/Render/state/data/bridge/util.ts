@@ -1,35 +1,21 @@
-import { ViewData, WebGLData } from "../../../webgl/drawData";
-import { setRectangle, RGBA256toWebglColor, ColorToArray,getBorderPoint } from "../../../webgl/utils";
-import { NODE_WIDTH, NODE_HEIGHT } from "../../../constant/node";
+import { ViewData, WebGLData, FrameData } from "../../../webgl/drawData";
+import { setRectangle, ColorToWebglColor } from "../../../webgl/utils";
 
-export function getAttributeAndUniformWithViewData(list:Array<ViewData>) {
-    const attributes:Array<WebGLData> = [];
-    const unifroms: Array<WebGLData> = [];
-    const a_Position : WebGLData = {
-        name : 'a_Position',
-        data : []
-    }
-    const u_Color : WebGLData = {
-        name : 'u_color',
-        data : []
-    }
-    
+export function getFrameDataWithViewData(list:Array<ViewData>) {
+    const frameData : Array<FrameData> = [];
     list.forEach(v=>{
-        let border = v.style.borderSize;
-        if(!border) {
-            border = {
-                right : 0, left : 0, top : 0,bottom : 0
-            }
+        const a_Position : WebGLData = {
+            name : 'a_Position',
+            data : setRectangle(v.x,v.y,v.w,v.h)
         }
-        a_Position.data.push(...setRectangle(v.x + border.left,v.y + border.top,v.w - border.left-border.right,v.h- border.top - border.bottom))
-        u_Color.data.push(RGBA256toWebglColor(ColorToArray(v.style.backgound)));
-        const borderData = getBorderPoint(v,NODE_WIDTH,NODE_HEIGHT);
-        if(borderData.length) {
-            a_Position.data.push(...borderData);
-            u_Color.data.push(RGBA256toWebglColor(ColorToArray(v.style.borderColor)));
+        const u_Color : WebGLData = {
+            name : 'u_color',
+            data : ColorToWebglColor(v.style.borderColor)
         }
+        frameData.push({
+            uniforms : [u_Color],
+            attributes : [a_Position]
+        })
     })
-    unifroms.push(u_Color)
-    attributes.push(a_Position);
-    return [unifroms,attributes];
+    return frameData;
 }

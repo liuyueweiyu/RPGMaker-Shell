@@ -5,7 +5,7 @@ import { MapFile } from "../../../Project/file";
 import { engine } from "../engine";
 import { NODE_HEIGHT, NODE_WIDTH } from "../../constant/node";
 import { throttle } from 'lodash';
-import { addHoverNodeAction, addActiveNodeAction } from "../../../../redux/actions/nodes";
+import { addActiveNodeAction } from "../../../../redux/actions/nodes";
 export default class EventManager {
     OnClick : ReactEventHandler = (e) => {
         const [x , y] = this.getXY(e);

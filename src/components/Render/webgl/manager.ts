@@ -1,9 +1,8 @@
 import { Program, Uniform,Attribute } from './program';
 import { UniformConfig, Shader, AttributeConfig } from './shaders/interface';
-import { createProgramWithShaderObj, getWebGLContext, drawArrays, setUniformDataWithConfig, setAttributeDataWithConfig } from './base';
-import { WebGLData, DrawArrayData, ViewData } from './drawData';
-import { setUniformData, setBufferData, setRectangle } from './utils';
-import { commonShape } from './shaders/shape';
+import { createProgramWithShaderObj, getWebGLContext, setUniformDataWithConfig } from './base';
+import { WebGLData, FrameData } from './drawData';
+import { setUniformData } from './utils';
 export default class WebglManager {
     private program : Map<string,Program> = new Map();
     private gl : WebGLRenderingContext | null = null;
@@ -50,37 +49,30 @@ export default class WebglManager {
         }
     }
 
-
-    test_runProgram(list:Array<ViewData>) {
-        const gl = this.getGL()
-        // const a_Position =
-        // const
-        const u_color = this.program.get('initBatchOfShape')?.uniforms.get('u_color');
-        list.forEach(a=>{
-            if(u_color) {
-                console.log('sss')
-            }
-            gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(setRectangle(a.x,a.y,a.w,a.h)),gl.STATIC_DRAW);
-            gl.uniform4f(u_color?.entity as WebGLUniformLocation, Math.random(), Math.random(), Math.random(), 1);
-            var primitiveType = gl.TRIANGLES;
-            var offset = 0;
-            var count = 6;
-            gl.drawArrays(primitiveType, offset, count);
-
-        })
-    }
-    
-    runProgram(name:string,uniformDatas:Array<WebGLData>,attributeDatas:Array<WebGLData>,data: DrawArrayData) {
+    runProgram(name:string,frameDatas:Array<FrameData>) {
         const gl = this.getGL()
         const programObj = this.program.get(name);
+        const uniformMap = programObj?.uniforms;
         if(programObj) {
-            
-            // console.log(uniformDatas[0].data.length,attributeDatas[0].data.length)
-            // const u_color = this.program.get('initBatchOfShape')?.uniforms.get('u_color');
-            // gl.uniform4f(u_color?.entity as WebGLUniformLocation, Math.random(), Math.random(), Math.random(), 1);
-            // setUniformDataWithConfig(gl,uniformDatas,programObj.uniforms);
-            // setAttributeDataWithConfig(gl,attributeDatas,programObj.attributes);
-            // drawArrays(gl,data);
+            frameDatas.forEach(frameData=>{
+                let count = 0;
+                frameData.attributes.forEach(a=>{
+                    count += a.data.length || 0;
+                    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(a.data),gl.STATIC_DRAW);
+                })
+                frameData.uniforms.forEach(u=>{
+                    const uniform = uniformMap?.get(u.name);
+                    if(uniform) {
+                        setUniformData(gl,uniform.entity,uniform.type,{
+                            x : Math.random(),
+                            y : Math.random(),
+                            z : Math.random(),
+                            w : 1
+                        });
+                    }
+                })
+                gl.drawArrays(gl.TRIANGLES,0,count);
+            })
         }
     }
 

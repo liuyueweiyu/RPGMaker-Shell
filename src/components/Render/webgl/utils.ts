@@ -35,7 +35,7 @@ export function setUniformData(gl:WebGLRenderingContext,uniform:WebGLUniformLoca
   }
 }
 
-export function setRectangle(x:number, y:number, width:number, height:number) {
+export function getRectangle(x:number, y:number, width:number, height:number) {
   var x1 = x;
   var x2 = x + width;
   var y1 = y;

@@ -5,7 +5,7 @@ import {
 } from '../../../constant/bridge';
 import { ViewData } from '../../../webgl/drawData';
 import { engine } from '../../engine';
-import { getFrameDataWithViewData } from './util';
+import { getFrameDataWithViewData, getGrid } from './util';
 export interface RenderTick {
     type : string;
     viewData : ViewData;
@@ -25,6 +25,10 @@ class RenderBridge {
     }
     end() {
         const frameData = getFrameDataWithViewData(this.shadelist);
+        const grid = getGrid();
+        if(grid){
+            frameData.push(grid);
+        }
         engine.webgl.runProgram("initBatchOfShape",frameData);
     }
 }

@@ -6,6 +6,7 @@ import RenderBridge from '../bridge';
 import { RENDER_TICK_TYPE_ADD_SHAPE } from '../../../constant/bridge';
 import { STYLE_TYPE_NODE_DEFAULT } from '../style/define';
 import { MapFile } from '../../../../Project/file';
+import { getStartXY } from '../../../../Project/util';
 class MapManager {
     nodes : Map<number,Node> = new Map();
     nodesPos : Array<number> = [];
@@ -15,8 +16,7 @@ class MapManager {
         const nodes : Map<number,Node> = new Map();
         const nodesPostion : Array<number> = [];
         if(engine.canvas?.width && engine.canvas?.height) {
-            const startX = (engine.canvas?.width - column * NODE_WIDTH) / 2;
-            const startY = (engine.canvas?.height - row * NODE_HEIGHT) / 2;
+            const [startX,startY] = getStartXY();
             for (let i = 0; i < row; i++) {
                 for (let j = 0; j < column; j++) {
                     const node = new Node(startX + j * NODE_WIDTH, startY + i * NODE_HEIGHT , NODE_TYPE_GRASS,STYLE_TYPE_NODE_DEFAULT);

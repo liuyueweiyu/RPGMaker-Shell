@@ -3,7 +3,6 @@ import {
     RENDER_TICK_TYPE_DELETE_SHAPE,
     RENDER_TICK_TYPE_UPDATE_SHAPE 
 } from '../../../constant/bridge';
-// import { drawRectangles } from '../../../webgl/index';
 import { ViewData } from '../../../webgl/drawData';
 import { engine } from '../../engine';
 import { getFrameDataWithViewData } from './util';

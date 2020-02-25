@@ -49,7 +49,7 @@ class MapManager {
         if(!this.renderFlag) {
             cancelAnimationFrame(this.requestID);
         } else {
-            this.requestID = requestAnimationFrame(this.renderMap.bind(this))
+            // this.requestID = requestAnimationFrame(this.renderMap.bind(this))
         }
     }
 }

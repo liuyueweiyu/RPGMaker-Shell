@@ -10,7 +10,7 @@ export function getFrameDataWithViewData(list:Array<ViewData>) {
         }
         const u_Color : WebGLData = {
             name : 'u_color',
-            data : ColorToWebglColor(v.style.borderColor)
+            data : ColorToWebglColor(v.style.backgound)
         }
         frameData.push({
             uniforms : [u_Color],

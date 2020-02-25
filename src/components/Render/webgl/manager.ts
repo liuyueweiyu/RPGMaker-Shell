@@ -63,12 +63,8 @@ export default class WebglManager {
                 frameData.uniforms.forEach(u=>{
                     const uniform = uniformMap?.get(u.name);
                     if(uniform) {
-                        setUniformData(gl,uniform.entity,uniform.type,{
-                            x : Math.random(),
-                            y : Math.random(),
-                            z : Math.random(),
-                            w : 1
-                        });
+                        console.log(u.data)
+                        setUniformData(gl,uniform.entity,uniform.type,u.data);
                     }
                 })
                 gl.drawArrays(gl.TRIANGLES,0,count);

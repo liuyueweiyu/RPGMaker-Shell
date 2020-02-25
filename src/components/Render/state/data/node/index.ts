@@ -49,8 +49,14 @@ class Node {
     setX(x:number) {
         this.x = x;
     }
+    getX(){
+        return this.x;
+    }
     setY(y:number) {
         this.y = y;
+    }
+    getY(){
+        return this.y;
     }
     setNodeType(nodeType:number) {
         this.nodeType = nodeType;

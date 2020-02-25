@@ -2,8 +2,7 @@ import { Style } from '.';
 import { strToColor } from './util';
 import { 
     STYLE_TYPE_NODE_DEFAULT,
-    STYLE_TYPE_NODE_DEFAULT_HOVER,
-    STYLE_TYPE_NODE_DEFAULT_ACTIVE
+    STYLE_NODE_DEFAULT_COLOR,
  } from './define';
 
 interface Func {
@@ -17,14 +16,8 @@ class StyleManager {
     }
     registerStyle() {
         this.styleMap.set(STYLE_TYPE_NODE_DEFAULT,{
-            backgound : strToColor("#A9CDA7"),
+            backgound : strToColor(STYLE_NODE_DEFAULT_COLOR),
         });
-        this.styleMap.set(STYLE_TYPE_NODE_DEFAULT_HOVER,{
-            backgound : strToColor("#A9CDA7"),
-        })
-        this.styleMap.set(STYLE_TYPE_NODE_DEFAULT_ACTIVE,{
-            backgound : strToColor("#A9CDA7"),
-        })
     }
 
     getStyle(name:string) {

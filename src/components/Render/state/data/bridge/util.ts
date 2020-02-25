@@ -1,10 +1,12 @@
 import { ViewData, FrameData,NewWebGLData } from "../../../webgl/drawData";
 import { getRectangle, ColorToWebglColor } from "../../../webgl/utils";
-import { NODE_WIDTH, NODE_HEIGHT } from "../../../constant/node";
-import store from "../../../../../redux";
-import { MapFile } from "../../../../Project/file";
+import { NODE_WIDTH, NODE_HEIGHT, NODE_HOVER_STATUS, NODE_ACTIVE_STATUS } from "../../../constant/node";
 import { getStartXY, getRowColumn } from "../../../../Project/util";
 import { engine } from "../../engine";
+import store from "../../../../../redux";
+import Node from '../node';
+import { STYLE_NODE_HOVER_BORDER_COLOR, STYLE_HOVER_WIDTH, STYLE_NODE_ACTIVE_BORDER_COLOR, STYLE_ACTIVE_WIDTH, STYLE_GRID_COLOR } from "../style/define";
+import { strToColor } from "../style/util";
 
 export function getFrameDataWithViewData(list:Array<ViewData>) {
     const frameData : Array<FrameData> = [];
@@ -33,11 +35,45 @@ export function getGrid() {
             gridlist.push(...getRectangle(0,startY+NODE_HEIGHT*i-gridWidth/2,width,gridWidth));           
         }
         const a_Position = NewWebGLData('a_Position',gridlist);
-        const u_Color = NewWebGLData('u_color',[1,1,1,1]);
+        const u_Color = NewWebGLData('u_color',ColorToWebglColor(strToColor(STYLE_GRID_COLOR)));
         return {
             uniforms : [u_Color],
             attributes : [a_Position]
         }
     }   
     return null;
+}
+
+export function getHoverOrActiveNodeFrameData() {
+    const nodes = store.getState().selectedNodes.nodes as Array<Array<Node>>;
+    const states = store.getState().selectedNodes.status;
+    if(!nodes || nodes[0].length === 0) {
+        return null;
+    }
+    const startX = nodes[0][0].getX(),startY = nodes[0][0].getY();
+    const w = nodes[0].length * NODE_WIDTH,h = nodes.length * NODE_HEIGHT;
+    const datalist : Array<number> = [];
+    let border = "",borderWidth = 0;
+    switch (states) {   
+        case NODE_HOVER_STATUS:
+            border = STYLE_NODE_HOVER_BORDER_COLOR;
+            borderWidth = STYLE_HOVER_WIDTH;
+            break;
+        case NODE_ACTIVE_STATUS:
+            border = STYLE_NODE_ACTIVE_BORDER_COLOR;
+            borderWidth = STYLE_ACTIVE_WIDTH;
+            break;
+        default:
+            break;
+    }
+    datalist.push(...getRectangle(startX,startY,w,borderWidth));
+    datalist.push(...getRectangle(startX,startY,borderWidth,h));
+    datalist.push(...getRectangle(startX+w-borderWidth,startY,borderWidth,h));
+    datalist.push(...getRectangle(startX,startY+h-borderWidth,w,borderWidth));
+    const a_Position = NewWebGLData('a_Position',datalist);
+    const u_Color = NewWebGLData('u_color',ColorToWebglColor(strToColor(border)));
+    return {
+        uniforms : [u_Color],
+        attributes : [a_Position]
+    }
 }

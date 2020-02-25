@@ -5,7 +5,7 @@ import {
 } from '../../../constant/bridge';
 import { ViewData } from '../../../webgl/drawData';
 import { engine } from '../../engine';
-import { getFrameDataWithViewData, getGrid } from './util';
+import { getFrameDataWithViewData, getGrid, getHoverOrActiveNodeFrameData } from './util';
 export interface RenderTick {
     type : string;
     viewData : ViewData;
@@ -24,10 +24,17 @@ class RenderBridge {
         } 
     }
     end() {
+        // 基础node
         const frameData = getFrameDataWithViewData(this.shadelist);
-        const grid = getGrid();
-        if(grid){
-            frameData.push(grid);
+        // 渲染网格
+        // const grid = getGrid();
+        // if(grid){
+        //     frameData.push(grid);
+        // }
+        // 获取hover/active态的边框
+        const border = getHoverOrActiveNodeFrameData();
+        if(border) {
+            frameData.push(border);
         }
         engine.webgl.runProgram("initBatchOfShape",frameData);
     }

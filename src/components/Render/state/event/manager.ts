@@ -3,9 +3,9 @@ import { WINDOW_MENU_HEIGHT,WINDOW_DASHBORD_WIDTH } from '../../constant/window'
 import store from "../../../../redux";
 import { MapFile } from "../../../Project/file";
 import { engine } from "../engine";
-import { NODE_HEIGHT, NODE_WIDTH } from "../../constant/node";
+import { NODE_HEIGHT, NODE_WIDTH, NODE_ACTIVE_STATUS } from "../../constant/node";
 import { throttle } from 'lodash';
-import { addActiveNodeAction } from "../../../../redux/actions/nodes";
+import { addHoverNodeAction,addActiveNodeAction } from "../../../../redux/actions/nodes";
 export default class EventManager {
     OnClick : ReactEventHandler = (e) => {
         const [x , y] = this.getXY(e);
@@ -17,13 +17,14 @@ export default class EventManager {
     }
 
     onHover : ReactEventHandler = (e) => {
-        // const [x, y] = this.getXY(e);
-        // const node = this.getTargetNode(x,y);
-        // if(node) {
-        //     store.dispatch(addHoverNodeAction(node))
-        // }
+        const [x, y] = this.getXY(e);
+        const nodes = this.getTargetNode(x,y,3,2);
+        if(nodes) {
+            //@ts-ignore
+            store.dispatch(addHoverNodeAction(nodes))
+        }
     }
-    OnHover = throttle(this.onHover,100);
+    OnHover = throttle(this.onHover,16.6);
 
     getXY(e:React.SyntheticEvent<Element, Event>) {
         e.persist();

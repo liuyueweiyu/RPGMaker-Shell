@@ -13,8 +13,6 @@ class NodeManager {
         if(!state.nodes) {
             state.nodes = [[]];
         }
-        this.setNodesStyle(state.nodes,STYLE_TYPE_NODE_DEFAULT);
-        this.setNodesStyle(nodes,STYLE_TYPE_NODE_DEFAULT_HOVER);
         state.status = NODE_HOVER_STATUS;
         state.nodes = nodes;
         return state;
@@ -28,8 +26,6 @@ class NodeManager {
             state.nodes = [[]];
         }
         if(state.status === NODE_HOVER_STATUS || !isAppend) {
-            this.setNodesStyle(state.nodes,STYLE_TYPE_NODE_DEFAULT);
-            this.setNodesStyle(nodes,STYLE_TYPE_NODE_DEFAULT_ACTIVE);
             state.nodes = nodes;
         }
         if(state.status === NODE_ACTIVE_STATUS && isAppend) {
@@ -40,13 +36,6 @@ class NodeManager {
         return state;
     }
 
-    setNodesStyle(nodes:Array<Array<Node>>,styleType:string) {
-        nodes.forEach(list=>{
-            list.forEach(n=>{
-                n.setStyleType(styleType);
-            })
-        })
-    }
 }
 
 

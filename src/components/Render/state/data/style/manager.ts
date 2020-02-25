@@ -18,18 +18,12 @@ class StyleManager {
     registerStyle() {
         this.styleMap.set(STYLE_TYPE_NODE_DEFAULT,{
             backgound : strToColor("#A9CDA7"),
-            borderColor : strToColor("#FFFFFF"),
-            borderSize : undefined
         });
         this.styleMap.set(STYLE_TYPE_NODE_DEFAULT_HOVER,{
             backgound : strToColor("#A9CDA7"),
-            borderColor : strToColor("#000000"),
-            borderSize : undefined
         })
         this.styleMap.set(STYLE_TYPE_NODE_DEFAULT_ACTIVE,{
             backgound : strToColor("#A9CDA7"),
-            borderColor : strToColor("#FF0000"),
-            borderSize : undefined
         })
     }
 

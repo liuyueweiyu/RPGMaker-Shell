@@ -50,46 +50,6 @@ export function getRectangle(x:number, y:number, width:number, height:number) {
  ];
 }
 
-export function getBorderPoint(v:ViewData,w:number,h:number) {
-    const border = v.style.borderSize;
-    const arr = [];
-    if(border) {
-      if(border.top !== 0) {
-        arr.push(...getQuadrilateralPoint(
-          v.x,v.y,
-          v.x+border.left,v.y+border.top,
-          v.x+w,v.y,
-          v.x+w-border.right,v.y+border.top
-        ));
-      }
-      if(border.left !== 0) {
-        arr.push(...getQuadrilateralPoint(
-          v.x,v.y,
-          v.x+border.left,v.y+border.top,
-          v.x,v.y+h,
-          v.x+border.left,v.y+h-border.bottom
-        ));
-      }
-      if(border.right !== 0) {
-        arr.push(...getQuadrilateralPoint(
-          v.x + w,v.y,
-          v.x+w-border.right,v.y+border.top,
-          v.x + w,v.y + h,
-          v.x+w-border.right,v.y+h -border.bottom
-        ))
-      }
-      if(border.bottom !== 0) {
-        arr.push(...getQuadrilateralPoint(
-          v.x,v.y+h,
-          v.x+border.left,v.y+h-border.bottom,
-          v.x + w,v.y + h,
-          v.x+w-border.right,v.y+h - border.bottom
-        ))
-      }
-    }
-    return arr;
-}
-
 export function getQuadrilateralPoint(x1:number,y1:number,x2:number,y2:number,x3:number,y3:number,x4:number,y4:number){
     return [
       x1,y1,

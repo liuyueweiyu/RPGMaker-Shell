@@ -12,12 +12,7 @@ class Node {
     private widgets : Array<Widegt>;  // 渲染类型
     private canReach : boolean = true;
     private styleType : string = "";
-    private borderWith = {
-        top: 0,
-        bottom:0,
-        right : 0,
-        left : 0
-    }
+
     constructor(x: number,y : number,nodeType : number,styleType:string) {
         this.id = getNewID(); 
         this.x = x;
@@ -76,19 +71,12 @@ class Node {
     }
 
     getRenderTick() {
-        const style = Object.assign({},engine.style.getStyle(this.styleType) as Style);
-        if(style.borderSize && this.borderWith) {
-            style.borderSize.right += this.borderWith.right;
-            style.borderSize.left += this.borderWith.left;
-            style.borderSize.top += this.borderWith.top;
-            style.borderSize.bottom += this.borderWith.bottom;
-        }
         return {
             x : this.x,
             y : this.y,
             w : NODE_WIDTH,
             h : NODE_HEIGHT,
-            style,
+            style: engine.style.getStyle(this.styleType) as Style
         }
     }
 }

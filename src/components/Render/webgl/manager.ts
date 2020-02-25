@@ -63,7 +63,6 @@ export default class WebglManager {
                 frameData.uniforms.forEach(u=>{
                     const uniform = uniformMap?.get(u.name);
                     if(uniform) {
-                        console.log(u.data)
                         setUniformData(gl,uniform.entity,uniform.type,u.data);
                     }
                 })

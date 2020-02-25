@@ -20,3 +20,10 @@ export interface ViewData {
     h: number,
     style : Style
 }
+
+export function NewWebGLData(name:string,data:any):WebGLData {
+    return {
+        name,
+        data
+    }
+}

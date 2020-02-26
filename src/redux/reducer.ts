@@ -34,21 +34,42 @@ export const openedMapFile = (state = {}, action: any) => {
   }
 }
 
-export const selectedNodes = (state = {}, action : any) =>{
+export const activeNodes = (state = [[]], action : any) => {
   switch (action.type) {
     case ACTION_TYPE_ADD_ACTIVE_NODE:
-      return engine.node.addActiveNode(state,action.nodes,action.isAppend);
-    case ACTION_TYPE_ADD_HOVER_NODE:
-      return engine.node.addHoverNode(state,action.nodes);
+      return action.nodes;
+      // return engine.node.addActiveNode(state,action.nodes,action.isAppend);
     default:
       return state;
   }
 }
 
+export const hoverNodes = (state = [[]], action: any)=>{
+  switch (action.type) {
+    case ACTION_TYPE_ADD_HOVER_NODE:
+      return action.nodes;
+      // return engine.node.addHoverNode(state,action.nodes);
+    default:
+      return state;
+  }
+}
+
+// export const selectedNodes = (state = {}, action : any) =>{
+//   switch (action.type) {
+//     case ACTION_TYPE_ADD_ACTIVE_NODE:
+//       return engine.node.addActiveNode(state,action.nodes,action.isAppend);
+//     case ACTION_TYPE_ADD_HOVER_NODE:
+//       return engine.node.addHoverNode(state,action.nodes);
+//     default:
+//       return state;
+//   }
+// }
+
 export const reducer = combineReducers({
-  projects : projects,
-  openedProject : openedProject,
-  openedMapFile : openedMapFile,
-  selectedNodes : selectedNodes
+  projects,
+  openedProject,
+  openedMapFile,
+  activeNodes,
+  hoverNodes
 })
 

@@ -13,9 +13,9 @@ class NodeManager {
         if(!state.nodes) {
             state.nodes = [[]];
         }
-        state.status = NODE_HOVER_STATUS;
-        state.nodes = nodes;
-        return state;
+        // state.status = NODE_HOVER_STATUS;
+        // state.nodes = nodes;
+        return ;
     }
 
     addActiveNode(state:any,nodes:Array<Array<Node>>,isAppend:boolean) {

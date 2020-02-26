@@ -2,11 +2,16 @@ import React,{ useState } from 'react';
 import { WINDOW_PROPERTY_WIDTH,WINDOW_MENU_HEIGHT } from '../Render/constant/window';
 import store from '../../redux';
 function Property() {
-    const [property,setProperty] = useState("");
+    const [activeNodes,setActivedNode] = useState("");
+    const [hoverNodes,setHoverNode] = useState("");
     store.subscribe(()=>{
-        const p = JSON.stringify(store.getState().selectedNodes);
-        if(p !== property) {
-            setProperty(p);
+        const a = JSON.stringify(store.getState().activeNodes);
+        const h = JSON.stringify(store.getState().hoverNodes);
+        if(a !== activeNodes) {
+            setActivedNode(a);
+        }
+        if(h !== hoverNodes){
+            setHoverNode(h);
         }
     })
     return (
@@ -24,7 +29,11 @@ function Property() {
                 }
             }
         >
-            <p>{property}</p>
+            <p>activeNodes:</p>
+            <p>{activeNodes}</p>
+            <p>---------</p>
+            <p>hoverNodes:</p>
+            <p>{hoverNodes}</p>
         </div>
     )
 }

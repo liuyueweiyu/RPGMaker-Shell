@@ -44,17 +44,12 @@ export function getGrid() {
     return null;
 }
 
-export function getHoverOrActiveNodeFrameData() {
-    const nodes = store.getState().selectedNodes.nodes as Array<Array<Node>>;
-    const states = store.getState().selectedNodes.status;
+function getFrameData(status:string,nodes : Array<Array<Node>>) {
     if(!nodes || nodes[0].length === 0) {
         return null;
     }
-    const startX = nodes[0][0].getX(),startY = nodes[0][0].getY();
-    const w = nodes[0].length * NODE_WIDTH,h = nodes.length * NODE_HEIGHT;
-    const datalist : Array<number> = [];
     let border = "",borderWidth = 0;
-    switch (states) {   
+    switch (status) {   
         case NODE_HOVER_STATUS:
             border = STYLE_NODE_HOVER_BORDER_COLOR;
             borderWidth = STYLE_HOVER_WIDTH;
@@ -66,6 +61,9 @@ export function getHoverOrActiveNodeFrameData() {
         default:
             break;
     }
+    const startX = nodes[0][0].getX(),startY = nodes[0][0].getY();
+    const w = nodes[0].length * NODE_WIDTH,h = nodes.length * NODE_HEIGHT;
+    const datalist : Array<number> = [];
     datalist.push(...getRectangle(startX,startY,w,borderWidth));
     datalist.push(...getRectangle(startX,startY,borderWidth,h));
     datalist.push(...getRectangle(startX+w-borderWidth,startY,borderWidth,h));
@@ -76,4 +74,12 @@ export function getHoverOrActiveNodeFrameData() {
         uniforms : [u_Color],
         attributes : [a_Position]
     }
+}
+
+export function getHoverFrameData(nodes : Array<Array<Node>>) {
+    return getFrameData(NODE_HOVER_STATUS,nodes);
+}
+
+export function getActiveFrameData(nodes : Array<Array<Node>>) {
+    return getFrameData(NODE_ACTIVE_STATUS,nodes);
 }

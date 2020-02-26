@@ -5,7 +5,8 @@ import {
 } from '../../../constant/bridge';
 import { ViewData } from '../../../webgl/drawData';
 import { engine } from '../../engine';
-import { getFrameDataWithViewData, getGrid, getHoverOrActiveNodeFrameData } from './util';
+import { getFrameDataWithViewData, getGrid, getActiveFrameData,getHoverFrameData } from './util';
+import store from '../../../../../redux';
 export interface RenderTick {
     type : string;
     viewData : ViewData;
@@ -32,10 +33,16 @@ class RenderBridge {
         //     frameData.push(grid);
         // }
         // 获取hover/active态的边框
-        const border = getHoverOrActiveNodeFrameData();
-        if(border) {
-            frameData.push(border);
+        const hoverBorder = getHoverFrameData(store.getState().hoverNodes);
+        if(hoverBorder) {
+            frameData.push(hoverBorder);
         }
+        const activeBorder = getActiveFrameData(store.getState().activeNodes);
+        if(activeBorder) {
+            frameData.push(activeBorder);
+            console.log(activeBorder)
+        }
+
         engine.webgl.runProgram("initBatchOfShape",frameData);
     }
 }

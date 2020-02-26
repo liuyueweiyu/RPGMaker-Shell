@@ -40,7 +40,6 @@ class RenderBridge {
         const activeBorder = getActiveFrameData(store.getState().activeNodes);
         if(activeBorder) {
             frameData.push(activeBorder);
-            console.log(activeBorder)
         }
 
         engine.webgl.runProgram("initBatchOfShape",frameData);

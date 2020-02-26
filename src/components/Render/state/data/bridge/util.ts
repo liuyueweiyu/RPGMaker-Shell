@@ -45,7 +45,7 @@ export function getGrid() {
 }
 
 function getFrameData(status:string,nodes : Array<Array<Node>>) {
-    if(!nodes || nodes[0].length === 0) {
+    if(!nodes || !nodes[0] || nodes[0].length === 0) {
         return null;
     }
     let border = "",borderWidth = 0;

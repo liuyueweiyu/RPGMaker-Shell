@@ -8,6 +8,7 @@ import { throttle } from 'lodash';
 import { addHoverNodeAction,addActiveNodeAction } from "../../../../redux/actions/nodes";
 export default class EventManager {
     OnClick : ReactEventHandler = (e) => {
+        e.persist();
         const [x , y] = this.getXY(e);
         const nodes = this.getTargetNode(x,y,3,2);
         if(nodes) {
@@ -17,6 +18,7 @@ export default class EventManager {
     }
 
     onHover : ReactEventHandler = (e) => {
+        e.persist();
         const [x, y] = this.getXY(e);
         const nodes = this.getTargetNode(x,y,3,2);
         if(nodes) {
@@ -27,7 +29,6 @@ export default class EventManager {
     OnHover = throttle(this.onHover,16.6);
 
     getXY(e:React.SyntheticEvent<Element, Event>) {
-        e.persist();
         // @ts-ignore
         return [e.clientX - WINDOW_DASHBORD_WIDTH,e.clientY - WINDOW_MENU_HEIGHT]
     }
@@ -45,6 +46,8 @@ export default class EventManager {
         const nodes : Array<Array<Node>> = [];
         const nodesPos = engine.map.nodesPos;
         const nodesMap = engine.map.nodes;
+        boxWidth = Math.min(boxWidth,mf.column - (index % mf.column));
+        boxHeight = Math.min(boxHeight,mf.row - (index % mf.row));
         for (let i = 0; i < boxHeight; i++) {
             const list : Array<Node> = [];
             for (let j = 0; j < boxWidth; j++) {

@@ -2,6 +2,7 @@ export interface Program {
     program : WebGLProgram;
     uniforms : Map<string,Uniform>;
     attributes : Map<string,Attribute>;
+    imageSrc: Map<string,HTMLImageElement>
 }
 
 export interface Uniform {

@@ -6,6 +6,8 @@ import EventManager from './event/manager';
 import NodeManager from './data/node/manager';
 import WebglManager from '../webgl/manager';
 import { commonShape } from '../webgl/shaders/shape';
+import { commonTexture } from '../webgl/shaders/texture';
+import imageSrc from '../state/data/image/tilesets/Dungeon_A1.png';
 export interface Engine {
     canvas : HTMLCanvasElement | null;
     api : APIManager ;
@@ -30,9 +32,12 @@ export const engine : Engine = {
 
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
-    // drawRectangle(canvas,0,0,canvas.width,canvas.height,WINDOW_CANVAS_BACKGROUND_COLOR);
     engine.webgl.setCanvas(canvas);
-    // engine.webgl.test_creatProgram();
+
+    const image = new Image();
+    image.src = imageSrc;
+    image.onload = function () {
+
     engine.webgl.creatProgram("initBatchOfShape",commonShape,[{
         name : 'u_resolution',
         type : 'uniform2f'
@@ -53,5 +58,44 @@ export function initEngine(canvas:HTMLCanvasElement) {
         renderType : engine.webgl.getGL().FLOAT,
         stride : 0,
         offset : 0
-    }])
+    }],[])
+
+    
+        engine.webgl.creatProgram("initTexture",commonTexture,[{
+            name : 'u_resolution',
+            type : 'uniform2f'
+        }],[{
+            name : 'u_resolution',
+            data : {
+                x : engine.webgl.getGL().canvas.width,
+                y : engine.webgl.getGL().canvas.height
+            }
+        }],[{
+            name : 'a_Position',
+            type : 'Float32Array',
+            normalize : false,
+            size : 2,
+            renderType : engine.webgl.getGL().FLOAT,
+            stride : 0,
+            offset : 0
+        },{
+            name : 'a_texCoord',
+            type : 'Float32Array',
+            normalize : false,
+            size : 2,
+            renderType : engine.webgl.getGL().FLOAT,
+            stride : 0,
+            offset : 0
+        }],[{
+            name : 'textImg1',
+            image
+        },{
+            name : 'textImg2',
+            image
+        },{
+            name : 'textImg3',
+            image
+        }])
+    }
+
 }

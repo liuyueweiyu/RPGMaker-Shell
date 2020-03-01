@@ -54,22 +54,21 @@ export const hoverNodes = (state = [[]], action: any)=>{
   }
 }
 
-// export const selectedNodes = (state = {}, action : any) =>{
-//   switch (action.type) {
-//     case ACTION_TYPE_ADD_ACTIVE_NODE:
-//       return engine.node.addActiveNode(state,action.nodes,action.isAppend);
-//     case ACTION_TYPE_ADD_HOVER_NODE:
-//       return engine.node.addHoverNode(state,action.nodes);
-//     default:
-//       return state;
-//   }
-// }
+export const nextWidgets = (state = "test",action :any)=>{
+  switch (action.type) {
+    case "test":
+      return state;
+    default:
+      return state;
+  }
+}
 
 export const reducer = combineReducers({
   projects,
   openedProject,
   openedMapFile,
   activeNodes,
-  hoverNodes
+  hoverNodes,
+  nextWidgets
 })
 

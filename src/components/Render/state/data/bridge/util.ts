@@ -7,6 +7,7 @@ import store from "../../../../../redux";
 import Node from '../node';
 import { STYLE_NODE_HOVER_BORDER_COLOR, STYLE_HOVER_WIDTH, STYLE_NODE_ACTIVE_BORDER_COLOR, STYLE_ACTIVE_WIDTH, STYLE_GRID_COLOR } from "../style/define";
 import { strToColor } from "../style/util";
+import { createTexture } from "../../../webgl/base";
 
 export function getFrameDataWithViewData(list:Array<ViewData>) {
     const frameData : Array<FrameData> = [];
@@ -15,7 +16,8 @@ export function getFrameDataWithViewData(list:Array<ViewData>) {
         const u_Color = NewWebGLData('u_color',ColorToWebglColor(v.style.backgound))
         frameData.push({
             uniforms : [u_Color],
-            attributes : [a_Position]
+            attributes : [a_Position],
+            count: 6
         })
     })
     return frameData;
@@ -82,4 +84,41 @@ export function getHoverFrameData(nodes : Array<Array<Node>>) {
 
 export function getActiveFrameData(nodes : Array<Array<Node>>) {
     return getFrameData(NODE_ACTIVE_STATUS,nodes);
+}
+
+export function getTestFrameData(list:Array<ViewData>) {
+
+    const frameData : Array<FrameData> = [];
+    const list_pos : Array<number> = []
+    const list_tex : Array<number> = [];
+    list.forEach(v=>{
+        list_pos.push(...getRectangle(v.x ,v.y,v.w,v.h));
+        list_tex.push(...getRectangle(0.0,0.0,0.5,0.5));
+    })
+    const a_Position = NewWebGLData('a_Position',list_pos);
+    const a_texCoord = NewWebGLData('a_texCoord',list_tex);
+    frameData.push({
+        uniforms : [],
+        attributes: [a_Position,a_texCoord],
+        count : list_pos.length / 2,
+        texSrc : 'textImg1'
+    })
+    // list.forEach(v=>{
+    //     const a_Position = NewWebGLData('a_Position',getRectangle(v.x ,v.y,v.w,v.h))
+    //     const a_texCoord = NewWebGLData('a_texCoord',getRectangle(0.0,0.0,0.5,0.5))
+        
+    //     frameData.push({
+    //         uniforms : [],
+    //         attributes : [a_Position,a_texCoord],
+    //         texture : [{
+    //             name : "textImg",
+    //             data : undefined
+    //         }]
+    //     })
+    // })
+    return frameData;
+}
+
+export function getTextureFrameData(image:HTMLImageElement) {
+    return createTexture(engine.webgl.getGL(),image);
 }

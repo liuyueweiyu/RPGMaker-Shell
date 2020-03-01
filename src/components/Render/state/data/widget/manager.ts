@@ -22,6 +22,9 @@ class Manager {
         
     }
 
+    getWidgetByID(id: number){
+        return this.widgets.get(id);
+    }
 
     render() {
 

@@ -9,7 +9,7 @@ class Node {
     private x : number;
     private y : number;
     private nodeType : number;        // 节点类型
-    private widgets : Array<Widegt>;  // 渲染类型
+    private widgets : Array<number>;  // 吸附的组件
     private canReach : boolean = true;
     private styleType : string = "";
 
@@ -22,21 +22,25 @@ class Node {
         this.styleType = styleType;
     }
     
-    addWidget(w:Widegt) {
-        this.canReach = this.canReach || w.getCanReach();
+    addWidget(wId:number,widgetType:number,canReach:boolean) {
+        this.canReach = this.canReach || canReach;
+
         let pos = -1;
         this.widgets.some((v,i)=>{
-            const flag = v.getWidgetType() === w.getWidgetType();
-            if(flag) {
-                pos = i;
+            const w = engine.widgets.getWidgetByID(v);
+            if(w) {
+                const flag = w.getWidgetType() === widgetType;
+                if(flag) {
+                    pos = i;
+                }
+                return flag;
             }
-            return flag;
+            return false;
         })
         if(pos < 0){
-            this.widgets.push(w);
-            this.widgets.sort((a,b)=>a.getZ()- b.getZ());
+            this.widgets.push(wId);     //追加系
         } else {
-            this.widgets[pos] = w;
+            this.widgets[pos] = wId;    //替代系
         }
     }
     
@@ -61,7 +65,7 @@ class Node {
     setNodeType(nodeType:number) {
         this.nodeType = nodeType;
     }
-    setWidgets(widgets:Array<Widegt>) {
+    setWidgets(widgets:Array<number>) {
         this.widgets = widgets;
     }
     setCanReach(canReach:boolean) {

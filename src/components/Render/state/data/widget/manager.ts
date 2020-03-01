@@ -1,7 +1,8 @@
-// import images from './definition';
-// import { drawImage } from '../../../webgl';
-
+import Widget from './index';
+import Node from '../node';
 class Manager {
+    private widgets : Map<number,Widget> = new Map();
+
     async initSrc(canvas:HTMLCanvasElement) {
         // try {
         //     images.forEach(async v=>{
@@ -16,6 +17,11 @@ class Manager {
         // }
 
     }
+
+    addWidget(nextWidgets:Array<Array<string>>,nodes:Array<Array<Node>>) {
+        
+    }
+
 
     render() {
 

@@ -4,6 +4,7 @@ import { NewMapFile, OpenMapFile } from '../components/Project/file';
 import { ACTION_TYPE_OPEN_FILE, ACTION_TYPE_ADD_FILE } from './actions/file';
 import { ACTION_TYPE_ADD_PROJECT, ACTION_TYPE_SET_OPENED_PROJECT } from './actions/projects';
 import { ACTION_TYPE_ADD_ACTIVE_NODE, ACTION_TYPE_ADD_HOVER_NODE } from './actions/nodes';
+import { ACTION_TYPE_SET_NEXT_WIDGETS, ACTION_TYPE_ADD_NEW_WIDGETS } from './actions/widget';
 import { engine } from '../components/Render/state/engine';
 export const projects = (state = [], action:any) => {
   switch (action.type) {
@@ -54,9 +55,12 @@ export const hoverNodes = (state = [[]], action: any)=>{
   }
 }
 
-export const nextWidgets = (state = "test",action :any)=>{
+export const nextWidgets = (state = [[]],action :any)=>{
   switch (action.type) {
-    case "test":
+    case ACTION_TYPE_SET_NEXT_WIDGETS:
+      return action.nextWidgetType;
+    case ACTION_TYPE_ADD_NEW_WIDGETS:
+      engine.widgets.addWidget(state,action.nodes);
       return state;
     default:
       return state;

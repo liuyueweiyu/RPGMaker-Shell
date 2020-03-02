@@ -74,7 +74,8 @@ function getFrameData(status:string,nodes : Array<Array<Node>>) {
     const u_Color = NewWebGLData('u_color',ColorToWebglColor(strToColor(border)));
     return {
         uniforms : [u_Color],
-        attributes : [a_Position]
+        attributes : [a_Position],
+        count: datalist.length / 2
     }
 }
 

@@ -3,8 +3,7 @@ import ground from './ground';
 interface ImgStandard {
     x : number,
     y : number,
-    type : string,
-    state : string
+    name : string
 }
 
 export interface ImgFileStandard {

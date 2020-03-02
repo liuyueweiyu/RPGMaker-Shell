@@ -7,28 +7,27 @@ import { NODE_HEIGHT, NODE_WIDTH, NODE_ACTIVE_STATUS } from "../../constant/node
 import { throttle } from 'lodash';
 import { addHoverNodeAction,addActiveNodeAction } from "../../../../redux/actions/nodes";
 export default class EventManager {
-    OnClick : ReactEventHandler = (e) => {
-        e.persist();
+    OnClick = (e:any) => {
         const [x , y] = this.getXY(e);
-        const nodes = this.getTargetNode(x,y,3,2);
+        console.log(e.clientX)
+        const nodes = this.getTargetNode(x,y);
         if(nodes) {
             //@ts-ignore
             store.dispatch(addActiveNodeAction(nodes,false));
         }
     }
 
-    onHover : ReactEventHandler = (e) => {
-        e.persist();
+    OnHover = (e:any) => {
         const [x, y] = this.getXY(e);
-        const nodes = this.getTargetNode(x,y,3,2);
+        const nodes = this.getTargetNode(x,y);
         if(nodes) {
             //@ts-ignore
             store.dispatch(addHoverNodeAction(nodes))
         }
     }
-    OnHover = throttle(this.onHover,16.6);
+    // OnHover = throttle(this.onHover,16.6);
 
-    getXY(e:React.SyntheticEvent<Element, Event>) {
+    getXY(e:any) {
         // @ts-ignore
         return [e.clientX - WINDOW_DASHBORD_WIDTH,e.clientY - WINDOW_MENU_HEIGHT]
     }

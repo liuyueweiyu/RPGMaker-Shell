@@ -33,28 +33,28 @@ class RenderBridge {
         image.src = imageSrc;
         image.onload =  ()=> {
         // 基础node
-        // const frameData = getFrameDataWithViewData(this.shadelist);
-        const frameData = getTestFrameData(this.shadelist);
+        const frameData = getFrameDataWithViewData(this.shadelist);
+        // const frameData = getTestFrameData(this.shadelist);
         // 渲染网格
         // const grid = getGrid();
         // if(grid){
         //     frameData.push(grid);
         // }
         // 获取hover/active态的边框
-        // const hoverBorder = getHoverFrameData(store.getState().hoverNodes);
-        // if(hoverBorder) {
-        //     frameData.push(hoverBorder);
-        // }
-        // const activeBorder = getActiveFrameData(store.getState().activeNodes);
-        // if(activeBorder) {
-        //     frameData.push(activeBorder);
-        // }
+        const hoverBorder = getHoverFrameData(store.getState().hoverNodes);
+        if(hoverBorder) {
+            frameData.push(hoverBorder);
+        }
+        const activeBorder = getActiveFrameData(store.getState().activeNodes);
+        if(activeBorder) {
+            frameData.push(activeBorder);
+        }
 
         // const texture = getTextureFrameData(image);
-        engine.webgl.runProgram("initTexture",frameData)
+        // engine.webgl.runProgram("initTexture",frameData)
         // const frameData = getTestFrameData(this.shadelist)
         // engine.webgl.testTextureProgram(image);
-        // engine.webgl.runProgram("initBatchOfShape",frameData);
+        engine.webgl.runProgram("initBatchOfShape",frameData);
         }
 
     }

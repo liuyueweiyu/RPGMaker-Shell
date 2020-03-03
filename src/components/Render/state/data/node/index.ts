@@ -22,7 +22,7 @@ class Node {
         this.styleType = styleType;
     }
     
-    addWidget(wId:number,widgetType:number,canReach:boolean) {
+    addWidget(wId:number,widgetType:string,canReach:boolean) {
         this.canReach = this.canReach || canReach;
 
         let pos = -1;

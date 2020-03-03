@@ -5,5 +5,6 @@ export function getNodeWithJson(jsonObj: any) {
     node.setId(obj.id);
     node.setWidgets(obj.widgets);
     node.setCanReach(obj.canReach);
+    node.setWidgets(obj.widgets);
     return node;
 }

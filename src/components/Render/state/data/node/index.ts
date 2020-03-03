@@ -13,12 +13,12 @@ class Node {
     private canReach : boolean = true;
     private styleType : string = "";
 
-    constructor(x: number,y : number,nodeType : number,styleType:string) {
+    constructor(x: number,y : number,nodeType : number,styleType:string,widgets : Array<number> = []) {
         this.id = getNewID(); 
         this.x = x;
         this.y = y;
         this.nodeType = nodeType;
-        this.widgets = [];
+        this.widgets = widgets;
         this.styleType = styleType;
     }
     

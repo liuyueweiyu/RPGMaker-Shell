@@ -5,6 +5,8 @@ export function StateToJson(state : any) {
     const s = Object.assign({},state);
     s.openedMapFile = 0;
     s.openedProject = 0;
+    s.activeNodes = [[]];
+    s.hoverNodes = [[]];
     const projects : Array<Project> = s.projects;
     projects.forEach(p=>{
         p.files.forEach(f=>{

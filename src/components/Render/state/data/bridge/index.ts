@@ -5,7 +5,7 @@ import {
 } from '../../../constant/bridge';
 import { ViewData } from '../../../webgl/drawData';
 import { engine } from '../../engine';
-import { getFrameDataWithViewData, getGrid, getActiveFrameData,getHoverFrameData, getTextureFrameData, getTestFrameData } from './util';
+import { getFrameDataWithViewData, getGrid, getActiveFrameData,getHoverFrameData, getTextureFrameData, getTestFrameData, getWidgetFrameData } from './util';
 import store from '../../../../../redux';
 import imageSrc from '../../data/image/tilesets/Dungeon_A1.png';
 
@@ -55,6 +55,10 @@ class RenderBridge {
         // const frameData = getTestFrameData(this.shadelist)
         // engine.webgl.testTextureProgram(image);
         engine.webgl.runProgram("initBatchOfShape",frameData);
+        const textureFrame = getWidgetFrameData();
+        console.log("textureFrame",textureFrame)
+        engine.webgl.runProgram("initTexture",textureFrame)
+
         }
 
     }

@@ -88,7 +88,6 @@ export function getActiveFrameData(nodes : Array<Array<Node>>) {
 }
 
 export function getTestFrameData(list:Array<ViewData>) {
-
     const frameData : Array<FrameData> = [];
     const list_pos : Array<number> = []
     const list_tex : Array<number> = [];
@@ -104,19 +103,33 @@ export function getTestFrameData(list:Array<ViewData>) {
         count : list_pos.length / 2,
         texSrc : 'textImg1'
     })
-    // list.forEach(v=>{
-    //     const a_Position = NewWebGLData('a_Position',getRectangle(v.x ,v.y,v.w,v.h))
-    //     const a_texCoord = NewWebGLData('a_texCoord',getRectangle(0.0,0.0,0.5,0.5))
-        
-    //     frameData.push({
-    //         uniforms : [],
-    //         attributes : [a_Position,a_texCoord],
-    //         texture : [{
-    //             name : "textImg",
-    //             data : undefined
-    //         }]
-    //     })
-    // })
+    return frameData;
+}
+
+export function getWidgetFrameData() {
+    const frameData : Array<FrameData> = [];
+    const widgets = engine.widgets.getWidgetMapSortByImage();
+    widgets.forEach((value,key)=>{
+        const list_tex : Array<number> = [];
+        const list_pos : Array<number> = [];
+        value.forEach((w)=>{
+            const widgetInfor = engine.widgets.getWidgetInfor(w.getWidgetType());
+            if(widgetInfor) {
+                list_tex.push(...getRectangle(widgetInfor?.x,widgetInfor?.y,widgetInfor?.w,widgetInfor?.h));            
+                list_pos.push(...getRectangle(w.getX(),w.getY(),NODE_WIDTH,NODE_HEIGHT));
+            } else {
+                throw new Error( w.getWidgetType() + "&widgetInfor not exit")
+            }
+        })
+        const a_Position = NewWebGLData('a_Position',list_pos);
+        const a_texCoord = NewWebGLData('a_texCoord',list_tex);
+        frameData.push({
+            uniforms : [],
+            attributes: [a_Position,a_texCoord],
+            count : list_pos.length / 2,
+            texSrc : key
+        })
+    })
     return frameData;
 }
 

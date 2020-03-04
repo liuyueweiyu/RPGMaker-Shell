@@ -40,6 +40,12 @@ class Widget {
     getStatus(){
         return this.status;
     }
+    getX() {
+        return this.x;
+    }
+    getY() {
+        return this.y;
+    }
     getZ(){
         return this.z;
     }

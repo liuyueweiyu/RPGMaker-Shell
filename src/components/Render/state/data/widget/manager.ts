@@ -53,6 +53,10 @@ class Manager {
         return this.widgets.get(id);
     }
 
+    getWidgetInfor(widgetType:string) {
+        return this.widgetTypeSizeInfor.get(widgetType);
+    }
+
     getWidgetMapSortByImage() {
         const m : Map<string,Array<Widget>> = new Map();
         this.widgets.forEach((v)=>{

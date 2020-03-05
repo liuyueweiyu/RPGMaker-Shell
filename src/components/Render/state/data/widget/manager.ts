@@ -10,9 +10,6 @@ class Manager {
     private imageToWidgetMap : Map<string,string> = new Map();      //key : imageName value: widgettype+status
     private widgetTypeSizeInfor : Map<string,ImageSizeInfor> = new Map(); // 存储每次widget的读取信息
     
-    constructor() {
-        this.init()
-    }
     init() {
         try{
             definitions.forEach(async imgFile=>{
@@ -49,8 +46,16 @@ class Manager {
         return nodes;
     }
 
+    setWidgets(w:Map<number,Widget>){
+        this.widgets = w;
+    }
+
     getWidgetByID(id: number){
         return this.widgets.get(id);
+    }
+
+    getCacheImage(src:string) {
+        return this.imagesMap.get(src);
     }
 
     getWidgetInfor(widgetType:string) {

@@ -3,6 +3,7 @@ import { UniformConfig, Shader, AttributeConfig } from './shaders/interface';
 import { createProgramWithShaderObj, getWebGLContext, setUniformDataWithConfig } from './base';
 import { WebGLData, FrameData, ImageInfor } from './drawData';
 import { setUniformData, getRectangle } from './utils';
+import { engine } from '../state/engine';
 export default class WebglManager {
     private program : Map<string,Program> = new Map();
     private gl : WebGLRenderingContext | null = null;
@@ -80,7 +81,7 @@ export default class WebglManager {
                     }
                 })
                 if(frameData.texSrc) {
-                    const image = programObj.imageSrc.get(frameData.texSrc);
+                    const image = engine.widgets.getCacheImage(frameData.texSrc);
                     if(image) {
                          var texture = gl.createTexture();
                         gl.bindTexture(gl.TEXTURE_2D,texture);

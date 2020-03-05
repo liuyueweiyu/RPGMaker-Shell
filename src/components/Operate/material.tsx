@@ -9,7 +9,7 @@ import { addActiveNodeAction } from '../../redux/actions/nodes';
 function Material() {
     const [current, setCurrent] = useState("1");
     const testClick = ()=>{
-        engine.api.callAPICallBack("SetNextAddWidgetsType",{ nextWidgets : [['pool-1-normal-1']] },(res)=>{})
+        engine.api.callAPICallBack("SetNextAddWidgetsType",{ nextWidgets : [['pool-1#normal-1']] },(res)=>{})
     }
     const add = ()=>{
         engine.api.callAPICallBack("TestAddWidget",{},(res)=>{

@@ -28,9 +28,11 @@ class MapManager {
         return [nodes,nodesPostion];
     }
 
-    openFile(mf:MapFile) {
+    async openFile(mf:MapFile) {
         this.nodes = mf.nodes;
         this.nodesPos = mf.nodesPos;
+        engine.widgets.setWidgets(mf.widgets)
+        await engine.widgets.init()
         this.renderFlag = true;
         this.requestID = requestAnimationFrame(this.renderMap.bind(this));
     }

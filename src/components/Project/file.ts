@@ -2,6 +2,7 @@ import { getNewID } from '../Generator/id';
 import { Project } from './project';
 import { engine } from '../Render/state/engine';
 import  Node from '../Render/state/data/node';
+import Widget from '../Render/state/data/widget';
 export interface MapFile {
     id : number;
     name : string;
@@ -10,6 +11,8 @@ export interface MapFile {
     parent : number;
     nodes : Map<number,Node>;
     nodesPos : Array<number>;
+    widgets : Map<number,Widget>
+    
 }
 
 export function NewMapFile(name:string, row: number, column:number,list :Array<Project>,projectId : number) {
@@ -20,7 +23,8 @@ export function NewMapFile(name:string, row: number, column:number,list :Array<P
         row : row,
         parent : projectId,
         nodes : new Map(),
-        nodesPos: []
+        nodesPos: [],
+        widgets : new Map()
     }
     list.some((v)=>{
         if(v.id === projectId) {

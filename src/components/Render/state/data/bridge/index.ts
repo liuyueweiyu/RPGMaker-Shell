@@ -36,6 +36,7 @@ class RenderBridge {
         const frameData = getFrameDataWithViewData(this.shadelist);
         // const frameData = getTestFrameData(this.shadelist);
         // 渲染网格
+        // @ts-ignore
         // const grid = getGrid();
         // if(grid){
         //     frameData.push(grid);
@@ -56,7 +57,6 @@ class RenderBridge {
         // engine.webgl.testTextureProgram(image);
         engine.webgl.runProgram("initBatchOfShape",frameData);
         const textureFrame = getWidgetFrameData();
-        console.log("textureFrame",textureFrame)
         engine.webgl.runProgram("initTexture",textureFrame)
 
         }

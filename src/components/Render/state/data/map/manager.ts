@@ -16,7 +16,7 @@ class MapManager {
         const nodes : Map<number,Node> = new Map();
         const nodesPostion : Array<number> = [];
         if(engine.canvas?.width && engine.canvas?.height) {
-            const [startX,startY] = getStartXY();
+            const [startX,startY] = getStartXY(row,column);
             for (let i = 0; i < row; i++) {
                 for (let j = 0; j < column; j++) {
                     const node = new Node(startX + j * NODE_WIDTH, startY + i * NODE_HEIGHT , NODE_TYPE_GRASS,STYLE_TYPE_NODE_DEFAULT);

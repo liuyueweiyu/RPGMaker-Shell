@@ -22,6 +22,9 @@ class Widget {
     setParent(p:number) {
         this.parent = p;
     }
+    setID(id:number) {
+        this.id = id;
+    }
     getID() {
         return this.id;
     }

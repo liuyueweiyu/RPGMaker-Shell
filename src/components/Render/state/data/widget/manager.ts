@@ -72,7 +72,9 @@ class Manager {
         return m;
     }
 
-    
+    getWidgets() {
+        return this.widgets;
+    }
     render() {
 
     }

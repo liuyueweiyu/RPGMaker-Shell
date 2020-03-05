@@ -8,6 +8,7 @@ import Node from '../node';
 import { STYLE_NODE_HOVER_BORDER_COLOR, STYLE_HOVER_WIDTH, STYLE_NODE_ACTIVE_BORDER_COLOR, STYLE_ACTIVE_WIDTH, STYLE_GRID_COLOR } from "../style/define";
 import { strToColor } from "../style/util";
 import { createTexture } from "../../../webgl/base";
+import { MapFile } from "../../../../Project/file";
 
 export function getFrameDataWithViewData(list:Array<ViewData>) {
     const frameData : Array<FrameData> = [];

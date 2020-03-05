@@ -3,7 +3,7 @@ import React,{ useState } from 'react';
 import { Modal,InputNumber } from 'antd';
 import  store from '../../redux';
 import { LOCALSTORAFE_ITEM_MAP } from '../Render/constant/project';
-import { StateToJson } from '../Render/state/data/map/util';
+import { saveMap } from '../Render/state/data/map/util';
 import { addFileAction } from '../../redux/actions/file';
 import { addProjectAction } from '../../redux/actions/projects';
 function GameMenu() {
@@ -19,7 +19,7 @@ function GameMenu() {
 
     const save = ()=>{
         const state = store.getState();
-        localStorage.setItem(LOCALSTORAFE_ITEM_MAP,StateToJson(state))
+        localStorage.setItem(LOCALSTORAFE_ITEM_MAP,saveMap(state))
     }
 
     const [addFileFlag, setAddFileFlag] = useState(false);

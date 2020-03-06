@@ -4,6 +4,7 @@ import StyleManager from './data/style/manager';
 import MapFile from '../state/data/map/manager';
 import EventManager from './event/manager';
 import NodeManager from './data/node/manager';
+import ModeManager from './data/mode/manager';
 import WebglManager from '../webgl/manager';
 import { commonShape } from '../webgl/shaders/shape';
 import { commonTexture } from '../webgl/shaders/texture';
@@ -16,6 +17,7 @@ export interface Engine {
     style : StyleManager;
     event : EventManager;
     node : NodeManager;
+    mode : ModeManager;
     webgl : WebglManager;
 }
 
@@ -27,6 +29,7 @@ export const engine : Engine = {
     style : new StyleManager(),
     event : new EventManager(),
     node : new NodeManager(),
+    mode : new ModeManager(),
     webgl : new WebglManager()
 }
 

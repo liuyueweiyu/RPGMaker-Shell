@@ -6,6 +6,8 @@ import { LOCALSTORAFE_ITEM_MAP } from '../Render/constant/project';
 import { saveMap } from '../Render/state/data/map/util';
 import { addFileAction } from '../../redux/actions/file';
 import { addProjectAction } from '../../redux/actions/projects';
+import { engine } from '../Render/state/engine';
+import { GLOBAL_MODE_WIDGET_ADD_MODE, GLOBAL_MODE_SELETED_MODE } from '../Render/state/data/mode/define';
 function GameMenu() {
     const [current, setCurrent] = useState("");
     
@@ -35,6 +37,10 @@ function GameMenu() {
             setMapColumn(0);
             setMapRow(0)
         }
+    }
+
+    const setGlobalMode = (mode:number)=>{
+        engine.api.callAPICallBack("SetGlobalMode",{mode},()=>{})
     }
     return (
         <React.Fragment>
@@ -75,7 +81,7 @@ function GameMenu() {
                     <Icon type="redo" />
                     重做
                 </Menu.Item>
-                <Menu.Item key="edit">
+                <Menu.Item key="edit" onClick={setGlobalMode.bind(null,GLOBAL_MODE_WIDGET_ADD_MODE)}>
                     <Icon type="edit"/>
                     单点绘制
                 </Menu.Item>
@@ -87,7 +93,7 @@ function GameMenu() {
                     <Icon type="highlight" />
                     阴影绘制
                 </Menu.Item>
-                <Menu.Item key="select">
+                <Menu.Item key="select" onClick={setGlobalMode.bind(null,GLOBAL_MODE_SELETED_MODE)}>
                     <Icon type="select" />
                     选择
                 </Menu.Item>

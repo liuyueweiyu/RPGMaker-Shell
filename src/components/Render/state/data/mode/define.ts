@@ -1,2 +1,6 @@
-export const GLOBAL_MODE_SELETED_MODE = 0;
+export const GLOBAL_MODE_GENERAL_MODE = 0;
 export const GLOBAL_MODE_WIDGET_ADD_MODE = 1;
+export const GLOBAL_MODE_SELETED_MODE = 2;
+
+export const GLOBAL_MODE_CLICK_ACTION = 0;
+export const GLOBAL_MODE_HOVER_ACTION = 1;

@@ -1,0 +1,2 @@
+export const GLOBAL_MODE_SELETED_MODE = 0;
+export const GLOBAL_MODE_WIDGET_ADD_MODE = 1;

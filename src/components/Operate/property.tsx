@@ -1,6 +1,7 @@
 import React,{ useState } from 'react';
 import { WINDOW_PROPERTY_WIDTH,WINDOW_MENU_HEIGHT } from '../Render/constant/window';
 import store from '../../redux';
+import { engine } from '../Render/state/engine';
 function Property() {
     const [activeNodes,setActivedNode] = useState("");
     const [hoverNodes,setHoverNode] = useState("");
@@ -13,6 +14,9 @@ function Property() {
         if(h !== hoverNodes){
             setHoverNode(h);
         }
+    })
+    engine.api.registerTriggerCallBack("AddWidgetCallBack",(res)=>{
+        console.log(res)
     })
     return (
         // tslint:disable-next-line: jsx-self-close

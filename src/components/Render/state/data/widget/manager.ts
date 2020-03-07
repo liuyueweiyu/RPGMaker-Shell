@@ -37,10 +37,12 @@ class Manager {
         nodes.forEach((list,i)=>{
             list.forEach((node,j)=>{
                 const widgetType = nextWidgets[i][j];
-                const [type,status] = widgetType.split("#");
-                const w = new Widget(type,status,node.getId(),node.getX(),node.getY(),0,true);
-                this.widgets.set(w.getID(),w);
-                node.addWidget(w.getID(),w.getType(),w.getCanReach());
+                if(widgetType) {
+                    const [type,status] = widgetType.split("#");
+                    const w = new Widget(type,status,node.getId(),node.getX(),node.getY(),0,true);
+                    this.widgets.set(w.getID(),w);
+                    node.addWidget(w.getID(),w.getType(),w.getCanReach());
+                }
             })
         })
         return nodes;

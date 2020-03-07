@@ -6,6 +6,7 @@ import Node from '../../node';
 import store from '../../../../../../redux';
 import { addActiveNodeAction } from '../../../../../../redux/actions/nodes';
 import { engine } from '../../../engine';
+import { NewSuccess } from '../../../api/response';
 function register(modeManager:ModeManager) {
     modeManager.addModeAction(
         GLOBAL_MODE_SELETED_MODE,
@@ -18,11 +19,10 @@ function register(modeManager:ModeManager) {
     modeManager.addModeAction(
         GLOBAL_MODE_WIDGET_ADD_MODE,
         GLOBAL_MODE_CLICK_ACTION,
-        ()=>{
-            const activeNodes = store.getState().activeNodes as Array<Array<Node>>;
+        (nodes)=>{
             const nextWidgetTypes = store.getState().nextWidgets as Array<Array<string>>;
-            console.log("add widget")
-            const res = engine.widgets.addWidget(nextWidgetTypes,activeNodes);
+            const res = engine.widgets.addWidget(nextWidgetTypes,nodes);
+            engine.api.triggerCallBack("AddWidgetCallBack",NewSuccess(res));
         }
     )
 }

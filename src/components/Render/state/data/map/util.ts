@@ -55,13 +55,13 @@ export function saveMap(state: any) {
         p.files.forEach(file=>{
             const f = Object.assign({},file);
             // @ts-ignore
-            f.nodes = MapToObj(f.nodes)
+            f.nodes = MapToObj(file.nodes)
             if(f.id === openedMapFile.id) {
                 //@ts-ignore
                 f.widgets = MapToObj(engine.widgets.getWidgets())
             } else {
                 //@ts-ignore
-                f.widgets = MapToObj(f.widgets);
+                f.widgets = MapToObj(file.widgets);
             }
         })
     })

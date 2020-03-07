@@ -44,14 +44,11 @@ export default class EventManager {
         }
         const indexX = Math.floor(( x - startX ) / NODE_WIDTH),
               indexY = Math.floor((y - startY) / NODE_HEIGHT);
-        // const index = Math.floor(( x - startX ) / NODE_WIDTH) + Math.floor((y - startY) / NODE_HEIGHT) * mf.column;
         const nodes : Array<Array<Node>> = [];
         const nodesPos = engine.map.nodesPos;
         const nodesMap = engine.map.nodes;
         boxWidth = Math.min(boxWidth,mf.column - indexX);
-
         boxHeight = Math.min(boxHeight,mf.row - indexY);
-        console.log(boxWidth,boxHeight)
         for (let i = 0; i < boxHeight; i++) {
             const list : Array<Node> = [];
             for (let j = 0; j < boxWidth; j++) {
@@ -63,7 +60,6 @@ export default class EventManager {
             }
             nodes.push(list);
         }
-        console.log("nodes",nodes)
         return nodes;
         
     }

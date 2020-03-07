@@ -22,6 +22,14 @@ class Node {
         this.styleType = styleType;
     }
     
+    getCopy() {
+        const w : Array<number> = []
+        const n = new Node(this.x,this.x,this.nodeType,this.styleType,w.concat(this.widgets));
+        n.setId(this.id);
+        n.setCanReach(this.canReach);
+        return n;
+    }
+
     addWidget(wId:number,widgetType:string,canReach:boolean) {
         this.canReach = this.canReach || canReach;
 

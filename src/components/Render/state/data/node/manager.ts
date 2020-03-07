@@ -36,6 +36,22 @@ class NodeManager {
         return state;
     }
 
+
+    copyNode(nodes:Array<Array<Node>>) {
+        const copy:Array<Array<Node>> = [];
+        nodes.forEach(list=>{
+            const l : Array<Node> =[];
+            list.forEach(n=>{
+                l.push(n.getCopy());
+            })
+            copy.push(l);
+        })
+        return copy;
+    }
+
+    replaceNode(nodes:Array<Array<Node>>) {
+
+    }
 }
 
 

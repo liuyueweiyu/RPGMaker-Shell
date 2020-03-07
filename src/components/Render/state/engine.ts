@@ -6,6 +6,7 @@ import EventManager from './event/manager';
 import NodeManager from './data/node/manager';
 import ModeManager from './data/mode/manager';
 import WebglManager from '../webgl/manager';
+import HistoryManager from './data/history/manager';
 import { commonShape } from '../webgl/shaders/shape';
 import { commonTexture } from '../webgl/shaders/texture';
 import imageSrc from '../state/data/image/tilesets/Dungeon_A1.png';
@@ -19,6 +20,7 @@ export interface Engine {
     node : NodeManager;
     mode : ModeManager;
     webgl : WebglManager;
+    history : HistoryManager;
 }
 
 export const engine : Engine = {
@@ -30,6 +32,7 @@ export const engine : Engine = {
     event : new EventManager(),
     node : new NodeManager(),
     mode : new ModeManager(),
+    history : new HistoryManager(),
     webgl : new WebglManager()
 }
 

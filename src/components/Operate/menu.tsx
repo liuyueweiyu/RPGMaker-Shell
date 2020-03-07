@@ -22,6 +22,7 @@ function GameMenu() {
     const save = ()=>{
         const state = store.getState();
         localStorage.setItem(LOCALSTORAFE_ITEM_MAP,saveMap(state))
+        message.success("保存成功!")
     }
 
     const [addFileFlag, setAddFileFlag] = useState(false);

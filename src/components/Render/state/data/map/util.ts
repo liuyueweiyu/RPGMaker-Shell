@@ -52,7 +52,8 @@ export function saveMap(state: any) {
     const projects : Array<Project> = state.projects ;
     const openedMapFile : MapFile = state.openedMapFile ;
     projects.forEach(p=>{
-        p.files.forEach(f=>{
+        p.files.forEach(file=>{
+            const f = Object.assign({},file);
             // @ts-ignore
             f.nodes = MapToObj(f.nodes)
             if(f.id === openedMapFile.id) {

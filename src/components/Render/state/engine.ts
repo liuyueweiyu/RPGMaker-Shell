@@ -36,6 +36,9 @@ export const engine : Engine = {
     webgl : new WebglManager()
 }
 
+// @ts-ignore
+window.engine = engine;
+
 export function initEngine(canvas:HTMLCanvasElement) {
     engine.canvas = canvas;
     engine.webgl.setCanvas(canvas);

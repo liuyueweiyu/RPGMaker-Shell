@@ -3,9 +3,8 @@ import { WINDOW_MENU_HEIGHT,WINDOW_DASHBORD_WIDTH } from '../../constant/window'
 import store from "../../../../redux";
 import { MapFile } from "../../../Project/file";
 import { engine } from "../engine";
-import { NODE_HEIGHT, NODE_WIDTH, NODE_ACTIVE_STATUS } from "../../constant/node";
-import { throttle } from 'lodash';
-import { addHoverNodeAction,addActiveNodeAction } from "../../../../redux/actions/nodes";
+import { NODE_HEIGHT, NODE_WIDTH } from "../../constant/node";
+import { addHoverNodeAction } from "../../../../redux/actions/nodes";
 import { GLOBAL_MODE_CLICK_ACTION } from "../data/mode/define";
 export default class EventManager {
     OnClick = (e:any) => {

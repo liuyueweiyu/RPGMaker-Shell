@@ -9,20 +9,22 @@ import { MapFile } from '../../../../Project/file';
 import { getStartXY } from '../../../../Project/util';
 class MapManager {
     nodes : Map<number,Node> = new Map();
-    nodesPos : Array<number> = [];
+    nodesPos : Array<Array<number>> = [];
     requestID  = -1;
     renderFlag = false;
     createMap(row : number,column: number) {
         const nodes : Map<number,Node> = new Map();
-        const nodesPostion : Array<number> = [];
+        const nodesPostion : Array<Array<number>> = [];
         if(engine.canvas?.width && engine.canvas?.height) {
             const [startX,startY] = getStartXY(row,column);
             for (let i = 0; i < row; i++) {
+                const pos : Array<number> = [];
                 for (let j = 0; j < column; j++) {
                     const node = new Node(startX + j * NODE_WIDTH, startY + i * NODE_HEIGHT , NODE_TYPE_GRASS,STYLE_TYPE_NODE_DEFAULT);
-                    nodesPostion.push(node.getId());
+                    pos.push(node.getId())
                     nodes.set(node.getId(),node);
                 }
+                nodesPostion.push(pos);
             }
         }
         return [nodes,nodesPostion];

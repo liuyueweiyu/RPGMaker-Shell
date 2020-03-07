@@ -10,7 +10,7 @@ export interface MapFile {
     row : number;
     parent : number;
     nodes : Map<number,Node>;
-    nodesPos : Array<number>;
+    nodesPos : Array<Array<number>>;
     widgets : Map<number,Widget>
     
 }

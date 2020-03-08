@@ -5,6 +5,7 @@ import { getWidgetWithJson } from "../widget/util";
 import { MapFile } from "../../../../Project/file";
 import { engine } from "../../engine";
 import Widget from "../widget";
+import { cloneDeep } from "lodash";
 // export function StateToJson(state : any) {
 //     const s = Object.assign({},state);
 //     s.openedMapFile = 0;
@@ -49,22 +50,25 @@ function ObjToMap<T>(obj:Object,jsonToObj:(data:any)=>T) {
 }
 
 export function saveMap(state: any) {
-    const projects : Array<Project> = state.projects ;
+    console.time()
+    const projects : Array<Project> = cloneDeep(state.projects as Array<Project> ) ;
     const openedMapFile : MapFile = state.openedMapFile ;
     projects.forEach(p=>{
-        p.files.forEach(file=>{
-            const f = Object.assign({},file);
+        p.files.forEach((f,i)=>{
             // @ts-ignore
-            f.nodes = MapToObj(file.nodes)
+            f.nodes = MapToObj(f.nodes)
             if(f.id === openedMapFile.id) {
                 //@ts-ignore
                 f.widgets = MapToObj(engine.widgets.getWidgets())
             } else {
                 //@ts-ignore
-                f.widgets = MapToObj(file.widgets);
+                f.widgets = MapToObj(f.widgets);
             }
+            //@ts-ignore
+            p.files[i] = f;
         })
     })
+    console.timeEnd()
     return JSON.stringify({
         projects
     })

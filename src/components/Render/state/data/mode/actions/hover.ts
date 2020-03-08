@@ -5,14 +5,14 @@ import {
 import Node from '../../node';
 import store from '../../../../../../redux';
 import { addHoverNodeAction } from '../../../../../../redux/actions/nodes';
+import { EventTarget } from '../../../event/target';
 
 function register(modeManager:ModeManager) {
     modeManager.addModeAction(
         GLOBAL_MODE_GENERAL_MODE,
         GLOBAL_MODE_HOVER_ACTION,
-        (nodes:Array<Array<Node>>)=>{
-            //@ts-ignore
-            store.dispatch(addHoverNodeAction(nodes,false));
+        (eventTarget:EventTarget)=>{
+            store.dispatch(addHoverNodeAction(eventTarget));
         }       
     )
 

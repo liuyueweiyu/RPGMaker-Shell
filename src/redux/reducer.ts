@@ -35,27 +35,25 @@ export const openedMapFile = (state = {}, action: any) => {
   }
 }
 
-export const activeNodes = (state = [[]], action : any) => {
+export const activeNodes = (state = [], action : any) => {
   switch (action.type) {
     case ACTION_TYPE_ADD_ACTIVE_NODE:
-      return action.nodes;
-      // return engine.node.addActiveNode(state,action.nodes,action.isAppend);
+      return action.eventTarget.nodes;
     default:
       return state;
   }
 }
 
-export const hoverNodes = (state = [[]], action: any)=>{
+export const hoverNodes = (state = [], action: any)=>{
   switch (action.type) {
     case ACTION_TYPE_ADD_HOVER_NODE:
-      return action.nodes;
-      // return engine.node.addHoverNode(state,action.nodes);
+      return action.eventTarget.nodes;
     default:
       return state;
   }
 }
 
-export const nextWidgets = (state = [[]],action :any)=>{
+export const nextWidgets = (state = [],action :any)=>{
   switch (action.type) {
     case ACTION_TYPE_SET_NEXT_WIDGETS:
       return action.nextWidgetType;
